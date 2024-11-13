@@ -1,0 +1,11 @@
+ion-content{
+    --background: linear-gradient(#810C09, #1B0302); 
+    ion-toolbar{
+        --background:none;
+    }
+    ion-img{
+        width: 200px;
+        height: 200px;
+        margin: 40px auto;
+    }
+}
