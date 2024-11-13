@@ -1,0 +1,35 @@
+ion-content{
+    text-align: center;
+    --background:none;
+    background: linear-gradient(rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.32)), url('/assets/img/signin-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-position: 25% center;
+
+    *{
+        color: white;
+    }
+    .main{
+        padding: 15px;
+    }
+    ion-img{
+        width: 200px;
+        height: 200px;
+        margin: 40px auto;
+    }
+    p{
+        font-size: 1.5rem;
+        margin-bottom: 55%;
+    }
+    a{text-decoration: none;}
+    ion-button{
+        margin-bottom: 15px;
+        --background: linear-gradient(to right, #15592d95, #b9000058);
+        --background-activated: #ffffff28;
+        --background-focused: #ffffff28;
+        font-size: 22px;
+        backdrop-filter: blur(2px);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50px;
+        letter-spacing: 5px;
+    }
+}
