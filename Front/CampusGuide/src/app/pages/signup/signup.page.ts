@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment.prod';
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
   standalone: true,
-  imports: [IonInput, IonIcon, IonText, IonItem, IonLabel, IonImg, IonButton, IonBackButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonInput, IonItem, IonLabel, IonImg, IonButton, IonBackButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class SignupPage implements OnInit {
   logo = environment.logo;

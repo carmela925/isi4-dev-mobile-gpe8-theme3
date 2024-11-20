@@ -11,12 +11,9 @@
     <h1>Sign Up</h1>
     <p>Learn something new with awesome and qualified instructors</p>
     <form (ngSubmit)="onSubmit()">
-      <ion-item>
-        <ion-input required type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input required type="text"></ion-input>
-      </ion-item>
+      <ion-input label="Name" type="text" label-placement="floating" fill="outline"></ion-input>
+      <ion-input label="Email" type="email" label-placement="floating" fill="outline"></ion-input>
+      <ion-input label="Password" type="password" label-placement="floating" fill="outline"></ion-input>
       <ion-button block color="primary" type="submit">
         Login
       </ion-button>

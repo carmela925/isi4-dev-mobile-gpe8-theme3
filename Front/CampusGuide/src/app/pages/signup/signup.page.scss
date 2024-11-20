@@ -1,11 +1,24 @@
 ion-content{
+    overflow-y: hidden;
     --background: linear-gradient(#810C09, #1B0302); 
     ion-toolbar{
         --background:none;
     }
+    ion-button{
+        text-transform: none;
+        width: 100%;
+    }
     ion-img{
         width: 200px;
         height: 200px;
-        margin: 40px auto;
+        margin: -3% auto;
+    }
+    .main{
+        padding: 0 20px;
+        position: relative;
+        *{color: white;}
+    }
+    form *{
+        margin-top: 10%;
     }
 }

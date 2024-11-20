@@ -15,7 +15,7 @@ ion-content{
     ion-img{
         width: 200px;
         height: 200px;
-        margin: 40px auto;
+        margin: 5% auto;
     }
     .main p{
         font-size: 1.5rem;
@@ -32,15 +32,19 @@ ion-content{
         border: 1px solid rgba(255,255,255,0.3);
         border-radius: 50px;
         letter-spacing: 5px;
+        text-transform: none;
     }
 }
 
 .form{
     background-color: white;
-    margin-top: 8%;
-    padding: 20px;
+    position: relative;
+    bottom: 0;
+    margin-top: 12%;
+    padding: 0 20px;
     h1{
-        font-size: 3.5rem;
+        margin: 0;
+        font-size: 3rem;
         color: #8C0406;
     }
     p{
@@ -48,7 +52,7 @@ ion-content{
     }
 
     input{
-        padding: 15px;
+        padding: 13px;
         width: 100%;
         background-color: #8c040627;
         border-radius: 5px;
@@ -63,8 +67,8 @@ ion-content{
   background-image: url('/assets/img/signin-shape.svg');
   background-repeat: no-repeat; /* Prevents tiling */
   background-size: cover;
-  width: 100vw;
-  height: 76vh;
+  width: 100%;
+  height: 76%;
   position: absolute;
   bottom: 0px;
   z-index: 0;
@@ -84,6 +88,10 @@ ion-content{
    a{
     color:green;
    }
+   p{
+        font-size: 1rem;
+        margin: 0;
+    }
 }
 
 @keyframes slideUp {
@@ -98,6 +106,27 @@ ion-content{
 .show{
     display: none;
 }
+.hide{
+    transition: all 3s ease;
+    transform: translateY(100%);
+}
 ion-list input:nth-of-type(2){
     margin-top: 40px;
+}
+.backbtn{
+    border: none;
+    transition: all 0.3s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.684);
+    // padding: 5px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    font-size: 1.3rem;
+}
+.backbtn:hover{
+    background-color: white;
+    transition: all 0.3s ease-in-out;
 }

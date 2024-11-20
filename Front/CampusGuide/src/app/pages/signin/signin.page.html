@@ -1,4 +1,9 @@
 <ion-content [fullscreen]="true">
+  @if (formVisible) {
+    <button type="button" class="backbtn" (click)="hideForm()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  }
   <div class="main">
     <ion-img [src]="logo" alt="logo"></ion-img>
     <p class="poppins-thin">
@@ -24,9 +29,8 @@
       </form>
       <div class="flex-text">
           <p>Don't have an account yet?</p>
-          <a>Sign up</a>
+          <a routerLink="signup">Sign up</a>
       </div>
     </div>
   </div>
-
 </ion-content>

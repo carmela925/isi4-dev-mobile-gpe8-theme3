@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StatusBar } from '@capacitor/status-bar';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { arrowBack, person} from "ionicons/icons"
@@ -12,6 +13,7 @@ import { arrowBack, person} from "ionicons/icons"
 export class AppComponent {
   constructor() {
     this.addAllIcons();
+    StatusBar.hide();
   }
 
   addAllIcons(){
