@@ -10,16 +10,17 @@
     <ion-img [src]="logo" alt="logo"></ion-img>
     <h1>Sign Up</h1>
     <p>Learn something new with awesome and qualified instructors</p>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()">
       <ion-item>
-        <ion-input required formControlName="email" type="text"></ion-input>
+        <ion-input required type="text"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input required formControlName="password" type="text"></ion-input>
+        <ion-input required type="text"></ion-input>
       </ion-item>
-      <ion-button block color="primary" type="submit" [disabled]="loginForm.invalid">
+      <ion-button block color="primary" type="submit">
         Login
       </ion-button>
     </form>
   </div>
 </ion-content>
+ 

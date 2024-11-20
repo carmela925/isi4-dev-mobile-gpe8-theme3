@@ -1,10 +1,32 @@
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true">
   <div class="main">
     <ion-img [src]="logo" alt="logo"></ion-img>
     <p class="poppins-thin">
       Discover new things and<br> Broaden your<br> knowledge
     </p>
-    <ion-button expand="block" shape="round" class="poppins-extralight signin-btn">Sign In</ion-button>
+    <ion-button expand="block" shape="round" class="poppins-extralight signin-btn" (click)="showForm()">Sign In</ion-button>
     <a class="poppins-thin" routerLink="signup">Create an account</a>
   </div>
+  <div class="form-shape" [class.show]="!formVisible">
+    <div class="form">
+      <h1 class="poppins-extrabold">Sign in</h1>
+      <p class="poppins-regular">More courses waiting for you</p>
+      <form>
+        <ion-list>
+          <input type="text" placeholder="username"/>
+          <input type="password" placeholder="password"/>
+        </ion-list>
+        <div class="flex-text">
+          <ion-checkbox labelPlacement="end">Remember me</ion-checkbox>
+          <a href="">Forgot Password</a>
+        </div>
+        <ion-button expand="block" shape="round" class="poppins-extralight" routerLink="/home" (click)="hideForm()">Login</ion-button>
+      </form>
+      <div class="flex-text">
+          <p>Don't have an account yet?</p>
+          <a>Sign up</a>
+      </div>
+    </div>
+  </div>
+
 </ion-content>

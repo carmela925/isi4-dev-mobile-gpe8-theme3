@@ -4,8 +4,9 @@ ion-content{
     background: linear-gradient(rgba(0, 0, 0, 0.37), rgba(0, 0, 0, 0.32)), url('/assets/img/signin-bg.jpg') no-repeat center center fixed;
     background-size: cover;
     background-position: 25% center;
+    position: relative;
 
-    *{
+    .main *{
         color: white;
     }
     .main{
@@ -16,12 +17,12 @@ ion-content{
         height: 200px;
         margin: 40px auto;
     }
-    p{
+    .main p{
         font-size: 1.5rem;
         margin-bottom: 55%;
     }
     a{text-decoration: none;}
-    ion-button{
+    ion-button.signin-btn{
         margin-bottom: 15px;
         --background: linear-gradient(to right, #15592d95, #b9000058);
         --background-activated: #ffffff28;
@@ -32,4 +33,71 @@ ion-content{
         border-radius: 50px;
         letter-spacing: 5px;
     }
+}
+
+.form{
+    background-color: white;
+    margin-top: 8%;
+    padding: 20px;
+    h1{
+        font-size: 3.5rem;
+        color: #8C0406;
+    }
+    p{
+        font-size: 1.2rem;
+    }
+
+    input{
+        padding: 15px;
+        width: 100%;
+        background-color: #8c040627;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+    }
+    input::placeholder{
+        color:#8C0406;
+    }
+}
+.form-shape{
+  background-image: url('/assets/img/signin-shape.svg');
+  background-repeat: no-repeat; /* Prevents tiling */
+  background-size: cover;
+  width: 100vw;
+  height: 76vh;
+  position: absolute;
+  bottom: 0px;
+  z-index: 0;
+  padding-top: 50px;
+  transform: translateY(0);
+  animation: slideUp 2s;
+}
+.flex-text{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    ion-checkbox::part(container) {
+        border-radius: 6px;
+        border: 2px solid #8c0406d0;
+   }
+   a{
+    color:green;
+   }
+}
+
+@keyframes slideUp {
+    0%{
+        transform: translateY(100%);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+.show{
+    display: none;
+}
+ion-list input:nth-of-type(2){
+    margin-top: 40px;
 }

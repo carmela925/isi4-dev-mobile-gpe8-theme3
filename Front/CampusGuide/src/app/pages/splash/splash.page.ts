@@ -15,6 +15,7 @@ export class SplashPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("hey");
   }
 
 }
