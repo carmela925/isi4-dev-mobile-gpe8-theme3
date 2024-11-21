@@ -26,5 +26,18 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/signup/signup.page').then( m => m.SignupPage)
       }
     ],
-  }
+  },
+  {
+    path: 'pastquestions',
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pages/pastquestions/pastquestions.page').then( m => m.PastquestionsPage)
+      },
+      {
+        path: 'subject/:id',
+        loadComponent: () => import('./pages/pastquestionslist/pastquestionslist.page').then( m => m.PastquestionslistPage)
+      }
+    ],
+  },
 ];
