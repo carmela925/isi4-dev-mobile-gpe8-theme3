@@ -67,6 +67,7 @@ export class SignupPage implements OnInit {
     // Call AuthService to handle Firebase signup
     this.authService.signUp(this.regForm.value.email, this.regForm.value.password,this.regForm.value.name)
       .then(user => {
+
         console.log('User signed up successfully:', user);
         alert('Signup successful!');
       })

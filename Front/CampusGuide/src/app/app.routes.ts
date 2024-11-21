@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { ForgetPwdComponent } from './pages/forget-pwd/forget-pwd.component';
 
 export const routes: Routes = [
   {
@@ -24,7 +25,10 @@ export const routes: Routes = [
       {
         path: 'signup',
         loadComponent: () => import('./pages/signup/signup.page').then( m => m.SignupPage)
-      }
+      },
+      { path: 'forget-password',
+        component: ForgetPwdComponent
+      },
     ],
   }
 ];
