@@ -16,16 +16,16 @@
     <div class="form">
       <h1 class="poppins-extrabold">Sign in</h1>
       <p class="poppins-regular">More courses waiting for you</p>
-      <form>
+      <form [formGroup]="LogForm" (ngSubmit)="Login()">
         <ion-list>
-          <input type="text" placeholder="username"/>
-          <input type="password" placeholder="password"/>
+          <input id="email" name="email" formControlName="email" type="text" placeholder="username" required/>
+          <input formControlName="password" required type="password" placeholder="password"/>
         </ion-list>
         <div class="flex-text">
           <ion-checkbox labelPlacement="end">Remember me</ion-checkbox>
-          <a href="">Forgot Password</a>
+          <a routerLink="forget-password">Forgot Password</a>
         </div>
-        <ion-button expand="block" shape="round" class="poppins-extralight" routerLink="/home" (click)="hideForm()">Login</ion-button>
+        <ion-button expand="block" type="submit" shape="round" class="poppins-extralight" (click)="hideForm()">Login</ion-button>
       </form>
       <div class="flex-text">
           <p>Don't have an account yet?</p>

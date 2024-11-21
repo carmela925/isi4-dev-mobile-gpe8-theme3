@@ -10,14 +10,13 @@
     <ion-img [src]="logo" alt="logo"></ion-img>
     <h1>Sign Up</h1>
     <p>Learn something new with awesome and qualified instructors</p>
-    <form (ngSubmit)="onSubmit()">
-      <ion-input label="Name" type="text" label-placement="floating" fill="outline"></ion-input>
-      <ion-input label="Email" type="email" label-placement="floating" fill="outline"></ion-input>
-      <ion-input label="Password" type="password" label-placement="floating" fill="outline"></ion-input>
+    <form [formGroup]="regForm"  (ngSubmit)="register()">
+      <ion-input label="Name"  id="name" name="name" formControlName="name" required type="text" label-placement="floating" fill="outline"></ion-input>
+      <ion-input label="Email"  id="email" name="email" formControlName="email" required type="email" label-placement="floating" fill="outline"></ion-input>
+      <ion-input label="Password" required formControlName="password" type="password" label-placement="floating" fill="outline"></ion-input>
       <ion-button block color="primary" type="submit">
         Login
       </ion-button>
     </form>
   </div>
 </ion-content>
- 
