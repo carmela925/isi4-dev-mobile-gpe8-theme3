@@ -1,0 +1,39 @@
+<ion-content [fullscreen]="true">
+  <header>
+    <div class="flex-item">
+      <div>
+        <i class="fa-solid fa-calendar"></i>
+        <h1>Dec 2024</h1>
+      </div>
+      <ion-button>
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="dates">
+      <div class="date">
+        <h2>15</h2>
+        <p>mon</p>
+      </div>
+      <div class="date">
+        <h2>15</h2>
+        <p>mon</p>
+      </div>
+      <div class="date">
+        <h2>15</h2>
+        <p>mon</p>
+      </div>
+    </div>
+    <div class="p-2 border-1 surface-border border-round w-15rem">
+      <ul class="list-none flex flex-column gap-2 p-0 m-0">
+          <li 
+              *ngFor="let product of availableProducts"
+              class="p-2 border-round shadow-1" 
+              pDraggable 
+              (onDragStart)="dragStart(product)" 
+              (onDragEnd)="dragEnd()">
+                  {{product.name}}
+          </li>
+      </ul>
+  </div>
+  </header>
+</ion-content>
