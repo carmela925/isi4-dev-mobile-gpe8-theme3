@@ -14,11 +14,11 @@ import { TabsModule } from "./components/tabs/tabs.module";
   imports: [IonApp, IonRouterOutlet, TabsModule],
 })
 export class AppComponent {
-  excludedRoutes: string[] = ['/splash', '/signin', '/signin/signup'];
+  excludedRoutes: string[] = ['/splash', '/', 'signin', '/signin/signup'];
 
   constructor(private router: Router) {
     this.addAllIcons();
-    StatusBar.hide();
+    // StatusBar.hide();
   }
 
   addAllIcons(){
