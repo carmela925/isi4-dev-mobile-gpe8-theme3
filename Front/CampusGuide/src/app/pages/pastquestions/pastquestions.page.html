@@ -1,29 +1,35 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Past Questions</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
+  <app-header></app-header>
   <h2>Choose the subject</h2>
-  <div class="cards">
+  <div class="cards subjects">
     <div class="card" routerLink="subject/1">
-      <p>Maths</p>
+      <i class="fas fa-code-branch"></i>
+      <p>Algorithms</p>
     </div>
     <div class="card">
-      <p>Maths</p>
+      <i class="fas fa-chart-bar"></i>
+      <p>Data Analysis</p>
     </div>
     <div class="card">
-      <p>Maths</p>
+      <i class="fas fa-project-diagram"></i>
+      <p>Operational Research</p>
     </div>
     <div class="card">
-      <p>Maths</p>
+      <i class="fas fa-globe"></i>
+      <p>Web Development</p>
     </div>
     <div class="card">
-      <p>Maths</p>
+      <i class="fas fa-mobile-alt"></i>
+      <p>Mobile Development</p>
     </div>
     <div class="card">
-      <p>Maths</p>
+      <i class="fas fa-network-wired"></i> 
+      <p>IT Architecture</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-tools"></i>  
+      <p>CI/CD</p>
     </div>
   </div>
+  
 </ion-content>

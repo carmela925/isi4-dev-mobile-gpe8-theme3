@@ -1,0 +1,27 @@
+{
+    "subjects": [
+      {
+        "level": "Level 4",
+        "semesters": [
+          {
+            "semester": [
+              { "name": "Algorithm", "icon": "fa-code-branch" },
+              { "name": "Data Analysis", "icon": "fa-chart-bar" },
+              { "name": "Operational Research", "icon": "fa-project-diagram" },
+              { "name": "Web Development", "icon": "fa-globe" },
+              { "name": "Mobile Development", "icon": "fa-mobile-alt" },
+              { "name": "IT Architecture", "icon": "fa-network-wired" },
+              { "name": "CI/CD", "icon": "fa-tools" }
+            ]
+          },
+          {
+            "semester": [
+              { "name": "Machine Learning", "icon": "fa-brain" },
+              { "name": "Cloud Computing", "icon": "fa-cloud" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  

@@ -1,0 +1,17 @@
+.map-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: none; /* Prevent default browser touch gestures */
+  position: relative;
+}
+
+svg {
+    transform: scale(0.5); /* Adjust to your preferred initial zoom */
+  transform-origin: center; /* Ensure zoom happens relative to the center */
+    display: block;
+    width: auto; /* Allow intrinsic dimensions */
+    height: auto;
+    max-width: none; /* Prevent size restriction */
+    max-height: none;
+}

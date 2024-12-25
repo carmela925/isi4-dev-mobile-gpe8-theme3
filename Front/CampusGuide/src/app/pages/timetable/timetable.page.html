@@ -1,15 +1,16 @@
 <ion-content [fullscreen]="true">
-  <header>
+  <header class="normal">
+    <app-header></app-header>
     <div class="flex-item">
-      <div>
-        <i class="fa-solid fa-calendar"></i>
+      <div class="flex-item">
         <h1>Dec 2024</h1>
+        <i class="fa-solid fa-calendar"></i>
       </div>
       <ion-button>
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
     </div>
-    <div class="dates">
+    <div class="dates flex-item">
       <div class="date">
         <h2>15</h2>
         <p>mon</p>
@@ -25,9 +26,17 @@
     </div>
   </header>
 
-  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let movie of movies" cdkDrag>{{movie}}</div>
-  </div>
-  
-  
+  <main>
+    <div class="flex-item">
+      <div class="markers">
+        <div class="marker" #cardmarker *ngFor="let movie of movies">
+          <p>hey</p>
+          <p>yo</p>
+        </div>
+      </div>
+      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" #card *ngFor="let movie of movies" cdkDrag>{{movie}}</div>
+      </div>
+    </div>
+  </main>
 </ion-content>

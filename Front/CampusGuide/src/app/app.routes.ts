@@ -47,5 +47,9 @@ export const routes: Routes = [
     path: 'timetable',
     loadComponent: () => import('./pages/timetable/timetable.page').then( m => m.TimetablePage)
   },
+  {
+    path: 'map',
+    loadComponent: () => import('./pages/map/map.page').then( m => m.MapPage)
+  },
 
 ];
