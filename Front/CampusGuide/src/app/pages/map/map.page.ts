@@ -26,7 +26,7 @@ export class MapPage implements OnInit, AfterViewInit{
     if (svgElement) {
       // Initialize Panzoom
       const panzoomInstance = Panzoom(svgElement, {
-        maxScale: 1, // Allow zooming in further
+        maxScale: 5, // Allow zooming in further
         minScale: 0.1, // Allow zooming out further
         contain: 'outside', // Prevent restricting zoom to the container
       });
