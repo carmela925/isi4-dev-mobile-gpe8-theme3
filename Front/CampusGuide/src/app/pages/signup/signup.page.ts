@@ -34,7 +34,7 @@ export class SignupPage implements OnInit {
         ],
       ],
       password: ['', [
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-8])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),
+        Validators.pattern('^(?=.*[a-zA-Z0-9]).{6,}$'),
         Validators.required,
       ],
     ]
@@ -66,16 +66,15 @@ export class SignupPage implements OnInit {
     }
 
     // Call AuthService to handle Firebase signup
-    this.authService.signup(this.regForm.value.email, this.regForm.value.password,this.role,this.regForm.value.name)
-      .then(user => {
-
-        console.log('User signed up successfully:', user);
-        alert('Signup successful!');
-      })
-      .catch(err => {
-        console.error('Error during signup:', err.message);
-        alert(err.message); // Show user-friendly error
-      });
+    this.authService.signup(this.regForm.value.email, this.regForm.value.password,this.regForm.value.name)
+    .subscribe(
+      (response) => {
+        console.log('User registered successfully', response);
+      },
+      (error) => {
+        console.error('Error registering user', error);
+      }
+    );
   }
 
   // Email validation function

@@ -94,14 +94,18 @@ export class SigninPage implements OnInit {
 
     // Call AuthService to handle Firebase sign-in
     this.authService
-      .signIn(this.LogForm.value.email, this.LogForm.value.password)
-      .then(user => {
-        console.log('User signed in:', user);
-        this.router.navigate(['/home']);
-      })
-      .catch(err => {
-        console.error('Error signing in:', err.message);
-      });
+      .signinUser(this.LogForm.value.email, this.LogForm.value.password)
+      .subscribe(
+        (response) => {
+          console.log('Sign-in successful', response);
+          this.router.navigate(['/home']);
+          // Handle successful login, e.g., store JWT token or navigate to dashboard
+        },
+        (error) => {
+          console.error('Error signing in', error);
+          // Handle error (show error message to the user)
+        }
+      );
   }
 
 
