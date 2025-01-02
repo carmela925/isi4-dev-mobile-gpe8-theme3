@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   //Here too Axel (laughing emoji)*2
   //Your big head
-  private apiUrl = "https://campusbackend-36og.onrender.com";
+  private apiUrl = "https://campusbackend-36og.onrender.com/auth";
 
   constructor(private auth: Auth,private http: HttpClient,private router : Router) {}
 
@@ -40,7 +40,7 @@ export class AuthService {
 
   signinUser(email: string, password: string): Observable<any> {
     const credentials = { email, password };
-    return this.http.post(`${this.apiUrl}/register`, credentials);
+    return this.http.post(`${this.apiUrl}/login`, credentials);
   }
 
   resetPassword(email: string) {
