@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   //Here too Axel (laughing emoji)*2
   //Your big head
-  private apiUrl = "http://localhost:5000/auth";
+  private apiUrl = "https://campusbackend-36og.onrender.com/auth";
 
   constructor(private auth: Auth,private http: HttpClient,private router : Router) {}
 
