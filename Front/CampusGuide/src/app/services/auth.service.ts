@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   //Here too Axel (laughing emoji)*2
   //Your big head
-  private apiUrl = "https://campusbackend-36og.onrender.com";
+  private apiUrl = "https://campusbackend-36og.onrender.com/auth";
 
   constructor(private auth: Auth,private http: HttpClient,private router : Router) {}
 
