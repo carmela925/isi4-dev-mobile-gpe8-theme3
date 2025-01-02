@@ -15,6 +15,5 @@
   </div>
 </header>
 <header class="shadow"></header>
-<div class="overlay" [class.show]="show" (click)="show=false"></div>
-<app-menu class="mymenu" [isOpen]="show"></app-menu>
+<app-menu class="mymenu" (state)="receivedState($event)" [isOpen]="show"></app-menu>
 

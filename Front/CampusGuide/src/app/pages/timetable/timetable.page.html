@@ -1,8 +1,8 @@
 <ion-content [fullscreen]="true">
   <ion-backdrop *ngIf="isDatePickerOpen" [stopPropagation]="true" class="mybackdrop trueback" [visible]="isDatePickerOpen"></ion-backdrop>
   <div class="ion-page">
+    <app-header class="app-header"></app-header>
     <header class="normal">
-      <app-header></app-header>
       <div class="flex-item ion-padding" style="padding-bottom: 0px;">
         <div class="flex-item">
           <h1 style="color: #fff;">{{months[selectedMonth]}} {{selectedYear}}</h1>
