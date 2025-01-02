@@ -1,7 +1,7 @@
 <ion-content>
     <header class="ion-padding">
         <div class="flex-item">
-            <div class="menu">
+            <div class="menu" (click)="showMenu()">
                 <div class="bar"></div>
                 <div class="bar"></div>
             </div>
@@ -108,5 +108,8 @@
             </ion-item>
         </ion-list>
     </div>
-
+    @if (show) {
+        <div class="overlay" (click)="show=false"></div>
+        <app-menu></app-menu>
+    }
 </ion-content>

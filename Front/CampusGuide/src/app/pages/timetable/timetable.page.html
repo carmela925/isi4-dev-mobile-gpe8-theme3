@@ -1,42 +1,62 @@
 <ion-content [fullscreen]="true">
-  <header class="normal">
-    <app-header></app-header>
-    <div class="flex-item">
+  <ion-backdrop *ngIf="isDatePickerOpen" [stopPropagation]="true" class="mybackdrop trueback" [visible]="isDatePickerOpen"></ion-backdrop>
+  <div class="ion-page">
+    <header class="normal">
+      <app-header></app-header>
+      <div class="flex-item ion-padding" style="padding-bottom: 0px;">
+        <div class="flex-item">
+          <h1 style="color: #fff;">{{months[selectedMonth]}} {{selectedYear}}</h1>
+          <ion-button style="color: #fff;" fill="clear" (click)="openDatePicker()">
+            <ion-icon name="calendar-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+        <ion-button fill="outline" color="light" size="small">
+          <ion-icon slot="icon-only" name="add"></ion-icon>
+        </ion-button>
+      </div>
+      <div class="dates flex-item">
+        <div #scrollContainer class="horizontal-scroll">
+          <div
+            *ngFor="let date of dates"
+            (click)="onDateSelect(date.date)"
+            #dateBox
+            class="date-box"
+            [class.selected]="selectedDate === date.date"
+          >
+            <div class="day-name">{{ date.day }}</div>
+            <div class="date-number">{{ date.date }}</div>
+          </div>
+        </div> 
+      </div>
+    </header>
+    <main>
       <div class="flex-item">
-        <h1>Dec 2024</h1>
-        <i class="fa-solid fa-calendar"></i>
-      </div>
-      <ion-button>
-        <ion-icon slot="icon-only" name="add"></ion-icon>
-      </ion-button>
-    </div>
-    <div class="dates flex-item">
-      <div class="date">
-        <h2>15</h2>
-        <p>mon</p>
-      </div>
-      <div class="date">
-        <h2>15</h2>
-        <p>mon</p>
-      </div>
-      <div class="date">
-        <h2>15</h2>
-        <p>mon</p>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <div class="flex-item">
-      <div class="markers">
-        <div class="marker" #cardmarker *ngFor="let movie of movies">
-          <p>hey</p>
-          <p>yo</p>
+        <div class="markers">
+          @for (movie of movies; track $index) {
+            <div class="marker" #cardmarker [class.active]="$index===0">
+              <p>9:30</p>
+              <p>12:30</p>
+            </div>
+          }
+        </div>
+        <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+          @for (movie of movies; track $index) {
+            <div class="schedule" #card [class.active]="$index===0" cdkDrag>
+              <h3>IT Architecture</h3>
+              <p>code UE2ISD</p>
+              <p>7h 30mins</p>
+              <p>Dr Someone</p>
+              <p>online</p>
+              <i class="subject-icon fas fa-network-wired"></i>
+            </div>
+          }
+          <!-- <div class="example-box" #card *ngFor="let movie of movies" cdkDrag>{{movie}}</div> -->
         </div>
       </div>
-      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" #card *ngFor="let movie of movies" cdkDrag>{{movie}}</div>
-      </div>
-    </div>
-  </main>
+    </main>
+  </div>
+
+    <!-- Date Picker -->
+     <div class="back" (click)="closeDatePicker()" *ngIf="isDatePickerOpen"></div>
+    <ion-datetime (ionChange)="onDateChange($event)" class="mybackdrop datetime"  *ngIf="isDatePickerOpen"></ion-datetime>
 </ion-content>

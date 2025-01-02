@@ -1,0 +1,30 @@
+.logo{
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #8C0406;
+}
+.main{
+    background-color: #fff;
+    width: 75%;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 6;
+}
+.flex-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 5px;
+    padding-bottom: 10px;
+    gap: 20px;
+    p,h4{
+        margin: 0;
+    }
+    h4{font-size: 18px;}
+    p{font-size: 14px;}
+}
