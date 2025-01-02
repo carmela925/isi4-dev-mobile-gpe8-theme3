@@ -5,6 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
 import { RouterModule } from '@angular/router';
 import { HeaderModule } from "../../components/header/header/header.module";
 import { MenuModule } from "../../components/menu/menu.module";
+import { QuestionsService } from 'src/app/services/questions.service';
 
 @Component({
   selector: 'app-pastquestions',
@@ -13,11 +14,33 @@ import { MenuModule } from "../../components/menu/menu.module";
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, RouterModule, HeaderModule, MenuModule]
 })
-export class PastquestionsPage implements OnInit {
+export class PastquestionsPage {
 
-  constructor() { }
+  subjectId: string = '';
+  title: string = '';
+  description: string = '';
+  pdfUrl: string = ''; // PDF URL for the question (if applicable)
 
-  ngOnInit() {
+  constructor(private questionService: QuestionsService) {}
+
+  addQuestion() {
+    const question = {
+      subjectId: this.subjectId,
+      title: this.title,
+      description: this.description,
+      pdfUrl: this.pdfUrl,
+    };
+
+    this.questionService.addQuestion(question).then(() => {
+      this.clearForm();
+    });
+  }
+
+  clearForm() {
+    this.subjectId = '';
+    this.title = '';
+    this.description = '';
+    this.pdfUrl = '';
   }
 
 }
