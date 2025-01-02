@@ -1,15 +1,27 @@
 .map-container {
-    width: 200vw; /* Full width of the viewport */
+    width: 100%; /* Full width of the viewport */
     height: 100vh; /* Full height of the viewport */
-    overflow: hidden; /* Prevent scrollbars */
     position: relative; /* Required for proper positioning */
-    touch-action: none; /* Disable default touch gestures for Panzoom */
+    overflow: scroll;
+    // touch-action: none; 
 }
 
-svg {
-    display: block;
-    width: auto; /* Allow intrinsic dimensions */
+// svg {
+//     display: block;
+//     width: 200%; 
+//     height: 100%;
+//     object-fit: cover; 
+//     transform: rotate(90deg);
+// }
+  
+#custom-map {
+    width: 200%;
     height: auto;
-    max-width: none; /* Prevent size restriction */
-    max-height: none;
+    display: block;
+    margin: auto;
+    padding: 20px 20px 20px 130px;
+    transform: rotate(90deg);
+    position: absolute;
+    top: 10%;
+    left: -50%;
 }
