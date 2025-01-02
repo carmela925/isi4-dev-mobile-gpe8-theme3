@@ -108,6 +108,5 @@
             </ion-item>
         </ion-list>
     </div>
-    <div class="overlay" [class.show]="show" (click)="show=false"></div>
-    <app-menu class="mymenu" [isOpen]="show"></app-menu>
+    <app-menu (state)="receivedState($event)"  [isOpen]="show"></app-menu>
 </ion-content>

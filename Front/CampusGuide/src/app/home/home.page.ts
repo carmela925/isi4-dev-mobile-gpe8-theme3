@@ -42,4 +42,7 @@ export class HomePage {
     this.show = true;
     console.log("showMenu");
   }
+  receivedState(state: boolean) {
+    this.show = state;
+  }
 }

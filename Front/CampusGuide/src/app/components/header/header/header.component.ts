@@ -15,4 +15,8 @@ export class HeaderComponent  implements OnInit {
     this.show = true;
     console.log("showMenu");
   }
+
+  receivedState(state: boolean) {
+    this.show = state;
+  }
 }
