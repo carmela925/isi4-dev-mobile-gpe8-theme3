@@ -68,7 +68,7 @@ export class SigninPage implements OnInit {
     form.classList.add('hide');
     setTimeout(() => {
       this.formVisible = false;
-    },3000)
+    },700)
   }
 
 

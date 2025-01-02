@@ -74,7 +74,7 @@ ion-content{
   z-index: 0;
   padding-top: 50px;
   transform: translateY(0);
-  animation: slideUp 2s;
+  animation: slideUp 0.7s;
 }
 .flex-text{
     display: flex;
@@ -107,7 +107,7 @@ ion-content{
     display: none;
 }
 .hide{
-    transition: all 3s ease;
+    transition: all 0.7s ease;
     transform: translateY(100%);
 }
 ion-list input:nth-of-type(2){
