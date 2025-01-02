@@ -108,8 +108,6 @@
             </ion-item>
         </ion-list>
     </div>
-    @if (show) {
-        <div class="overlay" (click)="show=false"></div>
-        <app-menu></app-menu>
-    }
+    <div class="overlay" [class.show]="show" (click)="show=false"></div>
+    <app-menu class="mymenu" [class.show]="show"></app-menu>
 </ion-content>

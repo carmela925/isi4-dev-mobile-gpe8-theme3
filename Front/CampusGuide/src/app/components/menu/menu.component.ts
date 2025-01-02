@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { addIcons } from 'ionicons';
 import { personOutline } from 'ionicons/icons';
 import { environment } from 'src/environments/environment';
@@ -10,11 +10,14 @@ import { environment } from 'src/environments/environment';
 })
 export class MenuComponent  implements OnInit {
   logo = environment.logo;
+  @Input()isOpen: boolean = false;
 
   constructor() { 
     addIcons({personOutline})
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.isOpen)
+  }
 
 }

@@ -1,4 +1,4 @@
-<div class="main">
+<div class="main" [class.open]="isOpen">
   <div class="flex-item">
     <div class="logo">
       <ion-img
@@ -11,16 +11,14 @@
       <p>Student</p>
     </div>
   </div>
-  <hr>
   <div class="profile">
     <ion-list lines="none">
       <ion-item button>
-        <ion-icon aria-hidden="true" name="person-outline" slot="start"></ion-icon>
+        <i class="fa-regular fa-user" slot="start"></i>
         <ion-label>User profile</ion-label>
       </ion-item>
     </ion-list>
   </div>
-  <hr>
   <div class="notifications">
     <h5 class="ion-padding">Notifications</h5>
     <ion-list lines="none">
