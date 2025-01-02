@@ -95,11 +95,11 @@ export class SigninPage implements OnInit {
     // Call AuthService to handle Firebase sign-in
     this.authService
       .signIn(this.LogForm.value.email, this.LogForm.value.password)
-      .then((user: import('firebase/auth').UserCredential) => {
+      .then(user => {
         console.log('User signed in:', user);
         this.router.navigate(['/home']);
       })
-      .catch((err: import('firebase/app').FirebaseError) => {
+      .catch(err => {
         console.error('Error signing in:', err.message);
       });
   }
