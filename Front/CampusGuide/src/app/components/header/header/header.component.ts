@@ -6,12 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent  implements OnInit {
-  toShow: boolean = false;
+  show: boolean = false;
   constructor() { }
 
   ngOnInit() {}
 
-  show(){
-
+  showMenu(){
+    this.show = true;
+    console.log("showMenu");
   }
 }
