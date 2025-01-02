@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   //Here too Axel (laughing emoji)*2
   //Your big head
-  private apiUrl = "https://campusbackend-36og.onrender.com/auth";
+  private apiUrl = "https://campusbackend-36og.onrender.com";
 
   constructor(private auth: Auth,private http: HttpClient,private router : Router) {}
 
@@ -31,27 +32,15 @@ export class AuthService {
   // }
 
   //Axel worked Here
-  signup(email: string, password: string, role: string, displayName: string) {
-    const data = { email, password, role, displayName };
-    return this.http.post(`${this.apiUrl}/register`, data).toPromise()
-      .then((response: any) => {
-        this.router.navigate(['/home']);
-      })
-      .catch((error) => {
-        console.log(error.error || error.message, 'danger');
-      });
+  signup(email: string, password: string, name: string) {
+    const userData = { email, password, name };
+
+    return this.http.post(`${this.apiUrl}/register`, userData);
   }
 
-  signIn(email: string, password: string) {
-    const data = { email, password };
-    return this.http.post(`${this.apiUrl}/login`, data).toPromise()
-      .then((response: any) => {
-        console.log(response);
-        this.router.navigate(['/home']);
-      })
-      .catch((error) => {
-        console.log(error.error || error.message, 'danger');
-      });
+  signinUser(email: string, password: string): Observable<any> {
+    const credentials = { email, password };
+    return this.http.post(`${this.apiUrl}/register`, credentials);
   }
 
   resetPassword(email: string) {
