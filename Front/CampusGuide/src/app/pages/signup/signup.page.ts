@@ -17,6 +17,7 @@ export class SignupPage implements OnInit {
   // loginForm = new FormGroup(
   //   email
   regForm !: FormGroup;
+  role: string = 'student'; // Default role is 'student'
 
   constructor(public formBuilder:FormBuilder,private loadingController: LoadingController, private authService : AuthService) { }
 
@@ -65,7 +66,7 @@ export class SignupPage implements OnInit {
     }
 
     // Call AuthService to handle Firebase signup
-    this.authService.signUp(this.regForm.value.email, this.regForm.value.password,this.regForm.value.name)
+    this.authService.signup(this.regForm.value.email, this.regForm.value.password,this.role,this.regForm.value.name)
       .then(user => {
 
         console.log('User signed up successfully:', user);
