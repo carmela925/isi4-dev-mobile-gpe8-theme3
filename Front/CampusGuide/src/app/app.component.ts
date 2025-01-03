@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
   imports: [IonApp, IonRouterOutlet, TabsModule, CommonModule],
 })
 export class AppComponent {
-  excludedRoutes: string[] = ['/splash', '/signin'];
+  excludedRoutes: string[] = ['/splash', '/signin', '/next'];
 
   constructor(private router: Router) {
     this.addAllIcons();

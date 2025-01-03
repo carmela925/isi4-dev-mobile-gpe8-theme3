@@ -43,13 +43,16 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/pastquestionslist/pastquestionslist.page').then( m => m.PastquestionslistPage)
       }
     ],
-  },  {
+  },
+  {
     path: 'timetable',
     loadComponent: () => import('./pages/timetable/timetable.page').then( m => m.TimetablePage)
   },
   {
     path: 'map',
     loadComponent: () => import('./pages/map/map.page').then( m => m.MapPage)
-  },
-
+  },{
+    path: 'next/:email',
+    loadComponent: () => import('./register-next/register-next.page').then( m => m.RegisterNextPage)
+  }
 ];

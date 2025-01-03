@@ -25,3 +25,17 @@
     top: 10%;
     left: -50%;
 }
+
+#position{
+    position: absolute;
+    top: 258px;
+    left: 250px;
+    z-index: 1;
+    width: 10px;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ff0000;
+    border-radius: 50%;
+}

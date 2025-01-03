@@ -1,0 +1,24 @@
+<ion-content [fullscreen]="true">
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button color="light" icon="arrow-back" text="" defaultHref="signin"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <div class="main">
+    <ion-img [src]="logo" alt="logo"></ion-img>
+    <h1>Almost there!</h1>
+    <p>Tell us more about your education</p>
+    <form (ngSubmit)="register()">
+      <ion-input label="Level" name="level"  id="level"  [(ngModel)]="level" required type="number" label-placement="floating" fill="outline"></ion-input>
+      <ion-input label="Field" name="field"  id="field"  [(ngModel)]="field" required type="text" label-placement="floating" fill="outline"></ion-input>
+      <ion-input label="Specialty" name="specialty" required [(ngModel)]="specialty" type="text" label-placement="floating" fill="outline"></ion-input>
+      <ion-button block color="primary" type="submit">
+        Submit
+      </ion-button>
+    </form>
+  </div>
+</ion-content>
+
+

@@ -54,6 +54,8 @@ export class MapPage implements OnInit, AfterViewInit{
 
     // Query all <g> elements under #test
     const roomElements = hostElement.querySelectorAll('#test > g');
+    const position = hostElement.querySelector('#position') as HTMLElement;
+    console.log(position);
 
     // Convert the NodeList into an Angular QueryList
     this.rooms = new QueryList<ElementRef>();
@@ -65,10 +67,20 @@ export class MapPage implements OnInit, AfterViewInit{
     if (this.rooms) {
       this.rooms.forEach((room) => {
         room.nativeElement.addEventListener('click', (e: Event) => {
+          // Get the bounding rectangle of the clicked element
+          const rect = room.nativeElement.getBoundingClientRect();
+
+          // Calculate x and y coordinates relative to the viewport
+          const x = rect.left + window.scrollX;
+          const y = rect.top + window.scrollY;
           this.popover.event = e;
           this.isOpen = true;
           this.text = room.nativeElement.id;
+          position.style.left = x + "px";
+          position.style.top = (y-2+rect.height/2) + "px";
           console.log('Room clicked:', room.nativeElement.id);
+          console.log('Position (x, y):', { x, y });
+          console.log('Bounding rectangle (width, height):',rect.width, rect.height);
         });
       });
     }

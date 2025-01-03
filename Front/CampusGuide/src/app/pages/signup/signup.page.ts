@@ -1,25 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonButton, IonImg, IonLabel, IonItem, IonText, IonIcon, IonInput, LoadingController } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonButton, IonImg, IonInput, LoadingController } from '@ionic/angular/standalone';
 import { environment } from 'src/environments/environment.prod';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
   standalone: true,
-  imports: [IonInput, IonItem, IonLabel, IonImg, IonButton, IonBackButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonInput, IonImg, IonButton, IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule, RouterModule]
 })
 export class SignupPage implements OnInit {
   logo = environment.logo;
-  // loginForm = new FormGroup(
-  //   email
   regForm !: FormGroup;
   role: string = 'student'; // Default role is 'student'
 
-  constructor(public formBuilder:FormBuilder,private loadingController: LoadingController, private authService : AuthService) { }
+  constructor(private formBuilder:FormBuilder,
+    private loadingController: LoadingController, 
+    private authService : AuthService,
+    private route: Router
+  ) { }
 
   ngOnInit() {
     console.log("hey");
@@ -45,10 +48,6 @@ export class SignupPage implements OnInit {
     return this.regForm?.controls;
   }
 
-  onSubmit() {
-    throw new Error('Method not implemented.');
-  }
-
   register() {
     // Trim and validate email
     this.regForm.value.email = this.regForm.value.email.trim();
@@ -66,15 +65,17 @@ export class SignupPage implements OnInit {
     }
 
     // Call AuthService to handle Firebase signup
-    this.authService.signup(this.regForm.value.email, this.regForm.value.password,this.regForm.value.name)
-    .subscribe(
-      (response) => {
-        console.log('User registered successfully', response);
-      },
-      (error) => {
-        console.error('Error registering user', error);
-      }
-    );
+    // this.authService.signup(this.regForm.value.email, this.regForm.value.password,this.regForm.value.name)
+    // .subscribe(
+    //   (response) => {
+    //     console.log('User registered successfully', response);
+    //     this.route.navigate(['next'],this.regForm.value.email);
+    //   },
+    //   (error) => {
+    //     console.error('Error registering user', error);
+    //   }
+    // );
+    this.route.navigate(['next',this.regForm.value.email]);
   }
 
   // Email validation function

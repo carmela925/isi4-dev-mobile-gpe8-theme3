@@ -168,16 +168,16 @@
     
    
 ion-popover {
-  --background: rgba(40, 173, 218, 0.6);
+  --background: none;
   --backdrop-opacity: 0.6;
-  --box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.6);
+  --box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.094);
   --color: white;
   --width: 300px;
 } 
 ion-popover ion-content {
-  --background: rgba(40, 173, 218, 0.6);
+  --background: rgb(255, 255, 255);
 }
 
 ion-popover::part(backdrop) {
-  background-color: rgb(6, 14, 106);
+  background-color: transparent;
 }
