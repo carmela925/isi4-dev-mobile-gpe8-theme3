@@ -14,7 +14,14 @@
                 </div>
             </div>
         </div>
-        <h1 class="poppins-medium">Hello David!</h1>
+        @if(!isLoading){
+        <h1 class="poppins-medium">Hello {{user.name}}!</h1>
+        }
+        @if(isLoading){
+            <h1 class="poppins-medium">
+                <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </h1>
+        }
         <p>Ready for today's courses?</p>
         <ion-searchbar class="search" placeholder="Search routes"></ion-searchbar>
         <div class="header-img">
@@ -22,46 +29,64 @@
         </div>
     </header>
     <header class="shadow"></header>
+
     <div class="routes ion-padding">
-        <div class="route">
-            <div class="flex-item">
-                <div class="icon"></div>
-                <p>Floor 1</p>
-            </div>
-            <div class="content">
-                <div>
-                    <p class="title">Labo Telecom/isi</p>
-                    <p>Building I</p>
+        @if (isLoading) {
+            <div class="route">
+                <div class="flex-item">
+                  <ion-skeleton-text class="skeleton-icon" [animated]="true"></ion-skeleton-text>
+                  <ion-skeleton-text class="skeleton-text" [animated]="true"></ion-skeleton-text>
                 </div>
-                <p class="badge">5 mins</p>
-            </div>
-        </div>
-        <div class="route">
-            <div class="flex-item">
-                <div class="icon"></div>
-                <p>Floor 1</p>
-            </div>
-            <div class="content">
-                <div>
-                    <p class="title">Labo Telecom/isi</p>
-                    <p>Building I</p>
+                <div class="content">
+                  <div>
+                    <ion-skeleton-text class="skeleton-title" [animated]="true"></ion-skeleton-text>
+                    <ion-skeleton-text class="skeleton-text" [animated]="true"></ion-skeleton-text>
+                  </div>
+                  <ion-skeleton-text class="skeleton-badge" [animated]="true"></ion-skeleton-text>
                 </div>
-                <p class="badge">5 mins</p>
             </div>
-        </div>
-        <div class="route">
-            <div class="flex-item">
-                <div class="icon"></div>
-                <p>Floor 1</p>
-            </div>
-            <div class="content">
-                <div>
-                    <p class="title">Labo Telecom/isi</p>
-                    <p>Building I</p>
+        }
+        @if (!isLoading) {
+            <div class="route">
+                <div class="flex-item">
+                    <div class="icon"></div>
+                    <p>Floor 1</p>
                 </div>
-                <p class="badge">5 mins</p>
+                <div class="content">
+                    <div>
+                        <p class="title">Labo Telecom/isi</p>
+                        <p>Building I</p>
+                    </div>
+                    <p class="badge">5 mins</p>
+                </div>
             </div>
-        </div>
+            <div class="route">
+                <div class="flex-item">
+                    <div class="icon"></div>
+                    <p>Floor 1</p>
+                </div>
+                <div class="content">
+                    <div>
+                        <p class="title">Labo Telecom/isi</p>
+                        <p>Building I</p>
+                    </div>
+                    <p class="badge">5 mins</p>
+                </div>
+            </div>
+            <div class="route">
+                <div class="flex-item">
+                    <div class="icon"></div>
+                    <p>Floor 1</p>
+                </div>
+                <div class="content">
+                    <div>
+                        <p class="title">Labo Telecom/isi</p>
+                        <p>Building I</p>
+                    </div>
+                    <p class="badge">5 mins</p>
+                </div>
+            </div>
+        }
     </div>
 
     <h2 class="ion-padding">Your Schedule</h2>

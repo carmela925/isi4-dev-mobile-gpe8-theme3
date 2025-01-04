@@ -53,4 +53,8 @@ export class AuthService {
         console.log(error.error || error.message);
       });
   }
+
+  getAuth(){
+    return this.auth.currentUser;
+  }
 }

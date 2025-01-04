@@ -1,0 +1,212 @@
+[
+    {
+        "id": "411",
+        "name": "Algorithms",
+        "codeUE": "ISI4167",
+        "semester": 1,
+        "level": 4,
+        "credits": 5,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "412",
+        "name": "Operational Research",
+        "codeUE": "ISI4177",
+        "semester": 1,
+        "level": 4,
+        "credits": 4,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "413",
+        "name": "Data Analysis",
+        "codeUE": "ISI4207",
+        "semester": 1,
+        "level": 4,
+        "credits": 4,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "414",
+        "name": "It Architecture",
+        "codeUE": "ISI4187",
+        "semester": 1,
+        "level": 4,
+        "credits": 4,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "415",
+        "name": "Agile Methodology",
+        "codeUE": "ISI4197A",
+        "semester": 1,
+        "level": 4,
+        "credits": 2,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "416",
+        "name": "CI CD",
+        "codeUE": "ISI4197B",
+        "semester": 1,
+        "level": 4,
+        "credits": 2,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "417",
+        "name": "Mobile Development",
+        "codeUE": "ISI4217",
+        "semester": 1,
+        "level": 4,
+        "credits": 4,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "418",
+        "name": "Advanced Web Development",
+        "codeUE": "INGE4167",
+        "semester": 1,
+        "level": 4,
+        "credits": 4,
+        "field": "Engineering",
+        "specialty": "ISI"
+    }, 
+    {
+        "id": "421",
+        "name": "Compilation",
+        "codeUE": "ISI4168",
+        "semester": 2,
+        "level": 4,
+        "credits": 3,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "422",
+        "name": "Business Processes Modeling",
+        "codeUE": "ISI4188",
+        "semester": 2,
+        "level": 4,
+        "credits": 3,
+        "field": "Engineering",
+        "specialty": "ISI"
+    }, 
+    {
+        "id": "423",
+        "name": "Software Testing and Quality Assurance",
+        "codeUE": "ISI4198",
+        "semester": 2,
+        "level": 4,
+        "credits": 3,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "424",
+        "name": "Transversal Project ISI",
+        "codeUE": "INGE4178",
+        "semester": 2,
+        "level": 4,
+        "credits": 4,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "425",
+        "name": "Entrepreneurship",
+        "codeUE": "HUM4168",
+        "semester": 2,
+        "level": 4,
+        "credits": 4,
+        "field": "Engineering",
+        "specialty": "ISI"
+    }, 
+    {
+        "id": "426",
+        "name": "Initiation To Research",
+        "codeUE": "IRS4168",
+        "semester": 2,
+        "level": 4,
+        "credits": 3,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "427",
+        "name": "Science And Wisdom",
+        "codeUE": "HUM4198",
+        "semester": 2,
+        "level": 4,
+        "credits": 1,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "428",
+        "name": "Work Psychology",
+        "codeUE": "HUM198B",
+        "semester": 2,
+        "level": 4,
+        "credits": 1,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "429",
+        "name": "Engineer Ethics",
+        "codeUE": "HUM4188",
+        "semester": 2,
+        "level": 4,
+        "credits": 2,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "511",
+        "name": "Advanced Database",
+        "codeUE": "ISI5169",
+        "semester": 1,
+        "level": 5,
+        "credits": 4,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "512",
+        "name": "Machine Learning",
+        "codeUE": "ISI5199",
+        "semester": 1,
+        "level": 5,
+        "credits": 4,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "513",
+        "name": "Business Intelligence",
+        "codeUE": "ISI5179B",
+        "semester": 1,
+        "level": 5,
+        "credits": 3,
+        "field": "Engineering",
+        "specialty": "ISI"
+    },
+    {
+        "id": "514",
+        "name": "Transversal Project",
+        "codeUE": "ING5169",
+        "semester": 1,
+        "level": 5,
+        "credits": 4,
+        "field": "Engineering",
+        "specialty": "ISI"
+    }
+]

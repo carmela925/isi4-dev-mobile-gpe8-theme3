@@ -65,17 +65,17 @@ export class SignupPage implements OnInit {
     }
 
     // Call AuthService to handle Firebase signup
-    // this.authService.signup(this.regForm.value.email, this.regForm.value.password,this.regForm.value.name)
-    // .subscribe(
-    //   (response) => {
-    //     console.log('User registered successfully', response);
-    //     this.route.navigate(['next'],this.regForm.value.email);
-    //   },
-    //   (error) => {
-    //     console.error('Error registering user', error);
-    //   }
-    // );
-    this.route.navigate(['next',this.regForm.value.email]);
+    this.authService.signup(this.regForm.value.email, this.regForm.value.password,this.regForm.value.name)
+    .subscribe(
+      (response) => {
+        console.log('User registered successfully', response);
+        this.route.navigate(['next'],this.regForm.value.email);
+      },
+      (error) => {
+        console.error('Error registering user', error);
+      }
+    );
+    // this.route.navigate(['next',this.regForm.value.email]);
   }
 
   // Email validation function

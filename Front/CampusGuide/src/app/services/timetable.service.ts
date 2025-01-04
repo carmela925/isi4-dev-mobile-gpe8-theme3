@@ -24,5 +24,4 @@ export class TimetableService {
   deleteTimetableEntry(timetableData: any) {
       return this.http.delete(`${this.apiUrl}/`, timetableData);
   }
-
 }

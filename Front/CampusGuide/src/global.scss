@@ -160,12 +160,22 @@
     .searchbar-input.sc-ion-searchbar-md{
       padding-top: 0.7rem;
       padding-bottom: 0.7rem;
+      background: #ffffff;
     }
     .searchbar-search-icon.sc-ion-searchbar-md{
       top: 16px;
     }
   }
-    
+
+ion-searchbar.search-map {
+    .searchbar-input.sc-ion-searchbar-md{
+      padding-top: 0.3rem;
+      padding-bottom: 0.3rem;
+    }
+    .searchbar-search-icon.sc-ion-searchbar-md{
+      top: 10px;
+    }
+}
    
 ion-popover {
   --background: none;

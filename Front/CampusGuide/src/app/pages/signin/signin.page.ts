@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonImg, IonText, IonButton, IonInput, IonItem, IonList, IonLabel, IonCheckbox, IonIcon, LoadingController } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonImg, IonText, IonButton, IonInput, IonItem, IonList, IonLabel, IonCheckbox, IonIcon, LoadingController, IonSpinner, IonBackdrop } from '@ionic/angular/standalone';
 import { environment } from 'src/environments/environment.prod';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { PreferencesService } from 'src/app/services/preferences.service';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.page.html',
   styleUrls: ['./signin.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonBackdrop, IonSpinner, 
     IonIcon,
     IonCheckbox,
     IonLabel,
@@ -34,12 +35,16 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SigninPage implements OnInit {
   logo = environment.logo;
   formVisible:boolean = false;
+  isLoading = false;
   LogForm !: FormGroup;
 
-  constructor(public formBuilder:FormBuilder, private loadingController: LoadingController, private authService : AuthService,private router: Router) { }
+  constructor(
+    public formBuilder:FormBuilder,
+    private authService : AuthService,
+    private preferencesService: PreferencesService,
+    private router: Router) { }
 
   ngOnInit() {
-    console.log("hey");
     this.LogForm = this.formBuilder.group({
       email: ['',
         [
@@ -73,6 +78,7 @@ export class SigninPage implements OnInit {
 
 
   Login() {
+    this.isLoading = true;
     // Trim and validate email
     this.LogForm.value.email = this.LogForm.value.email.trim();
     this.LogForm.value.password = this.LogForm.value.password.trim();
@@ -98,10 +104,11 @@ export class SigninPage implements OnInit {
       .subscribe(
         (response) => {
           console.log('Sign-in successful', response);
-          this.router.navigate(['/home']);
+          this.saveUser();
           // Handle successful login, e.g., store JWT token or navigate to dashboard
         },
         (error) => {
+          this.isLoading = false;
           console.error('Error signing in', error);
           // Handle error (show error message to the user)
         }
@@ -115,5 +122,25 @@ export class SigninPage implements OnInit {
     return emailRegex.test(email);
   }
 
+  async saveUser(){
+    const user = {
+      uid: this.authService.getAuth()?.uid,
+      name: this.authService.getAuth()?.displayName,
+      email: this.authService.getAuth()?.email,
+      field: "Engineering",
+      specialty: "ISI",
+      level: 4,
+      loginDate: new Date()
+    }
+    try {
+      await this.preferencesService.set("user",user);
+      this.isLoading = false;
+      this.router.navigate(['/home']);
+    } catch (error) {
+      console.log(error);
+      this.isLoading = false;
+      this.router.navigate(['/home']);
+    }
+  }
 
 }

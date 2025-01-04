@@ -1,27 +1,42 @@
 {
-    "subjects": [
-      {
-        "level": "Level 4",
-        "semesters": [
-          {
-            "semester": [
-              { "name": "Algorithm", "icon": "fa-code-branch" },
-              { "name": "Data Analysis", "icon": "fa-chart-bar" },
-              { "name": "Operational Research", "icon": "fa-project-diagram" },
-              { "name": "Web Development", "icon": "fa-globe" },
-              { "name": "Mobile Development", "icon": "fa-mobile-alt" },
-              { "name": "IT Architecture", "icon": "fa-network-wired" },
-              { "name": "CI/CD", "icon": "fa-tools" }
-            ]
-          },
-          {
-            "semester": [
-              { "name": "Machine Learning", "icon": "fa-brain" },
-              { "name": "Cloud Computing", "icon": "fa-cloud" }
-            ]
-          }
+  "subjects": [
+    {
+      "level": 4,
+      "semesters": [
+        [ 
+          { "name": "Algorithms", "icon": "fa-code-branch" },
+          { "name": "Data Analysis", "icon": "fa-chart-bar" },
+          { "name": "Operational Research", "icon": "fa-project-diagram" },
+          { "name": "Advanced Web Development", "icon": "fa-globe" },
+          { "name": "Mobile Development", "icon": "fa-mobile-alt" },
+          { "name": "It Architecture", "icon": "fa-network-wired" },
+          { "name": "Agile Methodology", "icon": "fa-tasks"},
+          { "name": "CI CD", "icon": "fa-tools" }
+        ],
+        [
+          { "name": "Compilation", "icon": "fa-code" },
+          { "name": "Business Processes Modeling", "icon": "fa-cogs" },
+          { "name": "Software Testing and Quality Assurance", "icon": "fa-check-circle" },
+          { "name": "Transversal Project ISI", "icon": "fa-project-diagram" },
+          { "name": "Entrepreneurship", "icon": "fa-lightbulb" },
+          { "name": "Initiation To Research", "icon": "fa-flask" },
+          { "name": "Science And Wisdom", "icon": "fa-book-open" },
+          { "name": "Work Psychology", "icon": "fa-brain" },
+          { "name": "Engineer Ethics", "icon": "fa-balance-scale" }
         ]
-      }
-    ]
-  }
-  
+      ]
+    },
+    {
+      "level": 5,
+      "semesters": [
+        [
+          { "name": "Advanced Database", "icon": "fa-database" },
+          { "name": "Machine Learning", "icon": "fa-robot" },
+          { "name": "Business Intelligence", "icon": "fa-chart-line" },
+          { "name": "Transversal Project", "icon": "fa-project-diagram" }
+        ],
+        []
+      ]
+    }
+  ]
+}

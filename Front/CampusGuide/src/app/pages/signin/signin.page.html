@@ -4,7 +4,7 @@
       <ion-icon name="arrow-back"></ion-icon>
     </button>
   }
-  <div class="main">
+  <div class="main ion-page">
     <ion-img [src]="logo" alt="logo"></ion-img>
     <p class="poppins-thin">
       Discover new things and<br> Broaden your<br> knowledge
@@ -25,7 +25,7 @@
           <ion-checkbox labelPlacement="end">Remember me</ion-checkbox>
           <a routerLink="forget-password">Forgot Password</a>
         </div>
-        <ion-button expand="block" type="submit" shape="round" class="poppins-extralight" (click)="hideForm()">Login</ion-button>
+        <ion-button expand="block" type="submit" shape="round" class="poppins-extralight">Login</ion-button>
       </form>
       <div class="flex-text">
           <p>Don't have an account yet?</p>
@@ -33,4 +33,10 @@
       </div>
     </div>
   </div>
+  @if (isLoading) {
+    <ion-backdrop style="background-color: #000; opacity: 0.4;" [visible]="true"></ion-backdrop>
+    <ion-item class="spinner">
+      <ion-spinner name="crescent"></ion-spinner>
+    </ion-item>
+  }
 </ion-content>
