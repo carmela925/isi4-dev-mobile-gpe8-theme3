@@ -1,0 +1,56 @@
+<main [class.isopen]="isModalOpen">
+  <form [formGroup]="courseForm" (ngSubmit)="createEntry()">
+    <h1>Add Course</h1>
+    <ion-item>
+      <ion-label>Select Course</ion-label>
+      <div class="custom-select">
+        <select formControlName="course" name="course" id="course">
+          <option *ngFor="let subject of subjects" [value]="subject">{{ subject.name }}</option>
+        </select>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Start Time</ion-label>
+      <ion-datetime-button datetime="time"></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime
+            id="time"
+            presentation="time"
+            value="01:22"
+            [formatOptions]="{
+              time: {
+                hour: '2-digit',
+                minute: '2-digit',
+              },
+            }"
+          ></ion-datetime>
+        </ng-template>
+      </ion-modal>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>End Time</ion-label>
+      <ion-datetime-button datetime="time2"></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime
+            id="time2"
+            presentation="time"
+            value="01:22"
+            [formatOptions]="{
+              time: {
+                hour: '2-digit',
+                minute: '2-digit',
+              },
+            }"
+          ></ion-datetime>
+        </ng-template>
+      </ion-modal>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="courseForm.invalid">Save</ion-button>
+  </form>
+  <div class="overlay" (click)="sendState()"></div>
+</main>

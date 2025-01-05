@@ -134,6 +134,7 @@ export class SigninPage implements OnInit {
     }
     try {
       await this.preferencesService.set("user",user);
+      console.log("saved user",user)
       this.isLoading = false;
       this.router.navigate(['/home']);
     } catch (error) {

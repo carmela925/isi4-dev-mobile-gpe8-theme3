@@ -5,7 +5,9 @@ import {CdkDragDrop, DragDropModule, moveItemInArray} from '@angular/cdk/drag-dr
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonTabButton, IonButton, IonIcon, IonLabel, IonItem, IonDatetime, IonModal, IonDatetimeButton, IonBackdrop } from '@ionic/angular/standalone';
 import { HeaderModule } from "../../components/header/header/header.module";
 import { addIcons } from 'ionicons';
-import { calendarOutline } from 'ionicons/icons';
+import { calendarOutline, saveOutline } from 'ionicons/icons';
+import { AddTimetableModule } from "../../components/add-timetable/add-timetable.module";
+import { Subject } from 'src/app/models/subject';
 
 @Component({
   selector: 'app-timetable',
@@ -19,7 +21,7 @@ import { calendarOutline } from 'ionicons/icons';
 ],
   styleUrls: ['./timetable.page.scss'],
   standalone: true,
-  imports: [IonBackdrop,IonDatetime,IonIcon, IonButton, IonContent, CommonModule, FormsModule, DragDropModule, HeaderModule]
+  imports: [IonBackdrop, IonDatetime, IonIcon, IonButton, IonContent, CommonModule, FormsModule, DragDropModule, HeaderModule, AddTimetableModule]
 })
 export class TimetablePage implements OnInit,AfterViewInit {
   @ViewChildren('card') cards!: QueryList<ElementRef>
@@ -28,6 +30,7 @@ export class TimetablePage implements OnInit,AfterViewInit {
   @ViewChildren('dateBox') dateBoxes!: QueryList<ElementRef>;
 
   isDatePickerOpen = false;
+  isModalOpen = false;
   
   dates: { date: number; day: string }[] = [];
   selectedDate: number | null = new Date().getDate();
@@ -49,6 +52,7 @@ export class TimetablePage implements OnInit,AfterViewInit {
     'Nov',
     'Dec'
   ]
+  subjects: Subject[] = [];
   movies = [
     'Episode I - The Phantom Menace',
     'Episode II - Attack of the Clones',
@@ -60,15 +64,18 @@ export class TimetablePage implements OnInit,AfterViewInit {
     'Episode VIII - The Last Jedi'
   ];
 
+
   constructor(){
     addIcons({
-      calendarOutline
+      calendarOutline,
+      saveOutline
     });
     this.selectedDate = new Date().getDate();
   }
   
   ngOnInit() {
     this.updateDates();
+    
   }
 
   ngAfterViewInit() {
@@ -78,6 +85,10 @@ export class TimetablePage implements OnInit,AfterViewInit {
     }, 0);
   }
 
+  openModal(){
+    this.isModalOpen = true;
+    console.log(this.isModalOpen);
+  }
 
   openDatePicker() {
     this.isDatePickerOpen = true;
@@ -104,10 +115,6 @@ export class TimetablePage implements OnInit,AfterViewInit {
       // Calculate scroll offset to center the selected element
       const offset =
         boxRect.left - containerRect.left + container.scrollLeft - container.offsetWidth / 2 + boxElement.offsetWidth / 2;
-        console.log("boxRect: ",boxRect)
-        console.log("containerRect: ",containerRect)
-        console.log("offset: " + offset)
-        console.log("offset: " + offset)
 
       container.scrollTo({
         left: offset,
@@ -160,5 +167,14 @@ export class TimetablePage implements OnInit,AfterViewInit {
       const m = this.cardmarkers.get(index)?.nativeElement as HTMLElement;
       m.style.height = c.getBoundingClientRect().height-40+'px';
     });
+  }
+
+  receivedState(state: boolean) {
+    this.isModalOpen = state;
+  }
+
+  recievedEntry(entry: any) {
+    this.isModalOpen = false;
+    console.log(entry)
   }
 }

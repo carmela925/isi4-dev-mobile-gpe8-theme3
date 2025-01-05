@@ -1,0 +1,38 @@
+.overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.5s ease;
+    z-index: 1;
+}
+main{
+    display: none;
+}
+main.isopen{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    position: relative;
+    z-index: 2;
+    background-color: #fff;
+    height: auto;
+    width: 95%;
+    padding: 20px;
+    margin: auto;
+    border-radius: 10px;
+}
+
+select#course{
+    border-radius: 5px;
+    padding: 5px 0;
+    width: 90%;
+}

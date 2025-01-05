@@ -42,6 +42,7 @@ export class AuthService {
     const credentials = { email, password };
     return this.http.post(`${this.apiUrl}/login`, credentials);
   }
+  
 
   resetPassword(email: string) {
     const data = { email };

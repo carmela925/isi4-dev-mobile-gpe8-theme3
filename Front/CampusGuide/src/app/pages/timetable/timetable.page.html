@@ -10,9 +10,14 @@
             <ion-icon name="calendar-outline" slot="icon-only"></ion-icon>
           </ion-button>
         </div>
-        <ion-button fill="outline" color="light" size="small">
-          <ion-icon slot="icon-only" name="add"></ion-icon>
-        </ion-button>
+        <div>
+          <ion-button fill="outline" color="light" size="small">
+            <ion-icon slot="icon-only" name="save-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="outline"  style="color: #fff;" (click)="openModal()" color="light" size="small">
+            <ion-icon slot="icon-only" name="add"></ion-icon>
+          </ion-button>
+        </div>
       </div>
       <div class="dates flex-item">
         <div #scrollContainer class="horizontal-scroll">
@@ -59,4 +64,5 @@
     <!-- Date Picker -->
      <div class="back" (click)="closeDatePicker()" *ngIf="isDatePickerOpen"></div>
     <ion-datetime (ionChange)="onDateChange($event)" class="mybackdrop datetime"  *ngIf="isDatePickerOpen"></ion-datetime>
+    <app-add-timetable (state)="receivedState($event)" [isModalOpen]="isModalOpen"></app-add-timetable>
 </ion-content>

@@ -92,7 +92,6 @@ export class PastquestionsPage implements OnInit{
   getIcons(){
     this.subjectService.getSubjectsIconsByLevel(this.user.level).subscribe(
       (data) => {
-        // console.log(data[0].semesters[0]);
         data[0].semesters[0].forEach((element: any) => {
           this.subjectsIcons.set(element.name, element.icon)
         });
