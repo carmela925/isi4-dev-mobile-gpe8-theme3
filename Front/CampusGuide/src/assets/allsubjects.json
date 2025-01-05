@@ -78,7 +78,7 @@
         "credits": 4,
         "field": "Engineering",
         "specialty": "ISI"
-    }, 
+    },
     {
         "id": "421",
         "name": "Compilation",
@@ -98,7 +98,7 @@
         "credits": 3,
         "field": "Engineering",
         "specialty": "ISI"
-    }, 
+    },
     {
         "id": "423",
         "name": "Software Testing and Quality Assurance",
@@ -128,7 +128,7 @@
         "credits": 4,
         "field": "Engineering",
         "specialty": "ISI"
-    }, 
+    },
     {
         "id": "426",
         "name": "Initiation To Research",

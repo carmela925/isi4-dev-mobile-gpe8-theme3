@@ -4,6 +4,8 @@ import { DragDropModule } from 'primeng/dragdrop';
 import { CommonModule } from '@angular/common';
 import { MenuModule } from "../components/menu/menu.module";
 import { PreferencesService } from '../services/preferences.service';
+import { AuthService } from '../services/auth.service';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home',
@@ -40,18 +42,32 @@ export class HomePage {
     },
   ];
 
-  constructor(private preferenceService: PreferencesService) {}
+  constructor(private preferenceService: PreferencesService, private authService : AuthService, private auth: Auth) {}
 
   ngOnInit() {
     // Fetch the user data when the component is initialized
-    this.preferenceService.get('user').then(user => {
-      this.user = user;
-      this.isLoading = false;  // Set loading to false when the user is loaded
-      console.log(this.user);  // Now it should log the user object
-    }).catch(error => {
-      console.error('Error retrieving user:', error);
-      this.isLoading = false;  // Stop loading in case of error
-    });
+    // this.preferenceService.get('user').then(user => {
+    //   this.user = user;
+    //   this.isLoading = false;  // Set loading to false when the user is loaded
+    //   console.log(this.user);  // Now it should log the user object
+    // }).catch(error => {
+    //   console.error('Error retrieving user:', error);
+    //   this.isLoading = false;  // Stop loading in case of error
+    // });
+
+    const user = this.auth.currentUser;
+    if (user) {
+      this.authService.getUserData(user.uid).then(userData => {
+        this.user = userData;
+        this.isLoading = false;  // Once data is loaded, set loading to false
+      }).catch(err => {
+        console.error('Error fetching user data:', err);
+        this.isLoading = false;
+      });
+    } else {
+      console.error('No user is currently logged in.');
+      this.isLoading = false;
+    }
   }
 
   showMenu() {
