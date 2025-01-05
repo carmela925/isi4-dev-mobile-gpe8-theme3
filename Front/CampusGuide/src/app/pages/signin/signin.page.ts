@@ -12,10 +12,9 @@ import { PreferencesService } from 'src/app/services/preferences.service';
   templateUrl: './signin.page.html',
   styleUrls: ['./signin.page.scss'],
   standalone: true,
-  imports: [IonBackdrop, IonSpinner, 
+  imports: [IonBackdrop, IonSpinner,
     IonIcon,
     IonCheckbox,
-    IonLabel,
     IonList,
     IonItem,
     IonInput,
@@ -99,20 +98,32 @@ export class SigninPage implements OnInit {
     }
 
     // Call AuthService to handle Firebase sign-in
-    this.authService
-      .signinUser(this.LogForm.value.email, this.LogForm.value.password)
-      .subscribe(
-        (response) => {
-          console.log('Sign-in successful', response);
-          this.saveUser();
-          // Handle successful login, e.g., store JWT token or navigate to dashboard
-        },
-        (error) => {
-          this.isLoading = false;
-          console.error('Error signing in', error);
-          // Handle error (show error message to the user)
-        }
-      );
+     // Call AuthService to handle Firebase sign-in
+     this.authService
+     .signIn(this.LogForm.value.email, this.LogForm.value.password)
+     .then(async (userCredential: import('firebase/auth').UserCredential) => {
+       console.log('User signed in:', userCredential.user);
+
+       // Fetch the user data from Firestore using the UID
+       const userData = await this.authService.getUserData(userCredential.user.uid);
+
+       if (userData) {
+         // Log the user data from Firestore to the console
+         console.log('User data from Firestore:', userData);
+
+         // Navigate to the home page after successful sign-in
+         this.router.navigate(['/home']);
+       } else {
+         console.error('No user data found for UID:', userCredential.user.uid);
+         alert('No user data found. Please try again later.');
+       }
+     })
+     .catch((err: import('firebase/app').FirebaseError) => {
+       console.error('Error signing in:', err.message);
+     })
+     .finally(() => {
+       this.isLoading = false;
+     });
   }
 
 

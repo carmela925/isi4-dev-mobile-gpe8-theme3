@@ -19,7 +19,7 @@ export class SignupPage implements OnInit {
   role: string = 'student'; // Default role is 'student'
 
   constructor(private formBuilder:FormBuilder,
-    private loadingController: LoadingController, 
+    private loadingController: LoadingController,
     private authService : AuthService,
     private route: Router
   ) { }
@@ -65,16 +65,33 @@ export class SignupPage implements OnInit {
     }
 
     // Call AuthService to handle Firebase signup
-    this.authService.signup(this.regForm.value.email, this.regForm.value.password,this.regForm.value.name)
-    .subscribe(
-      (response) => {
-        console.log('User registered successfully', response);
-        this.route.navigate(['next'],this.regForm.value.email);
-      },
-      (error) => {
-        console.error('Error registering user', error);
-      }
-    );
+  this.authService.signUp(this.regForm.value.email, this.regForm.value.password, this.regForm.value.name)
+  .then((userCredential) => {
+    console.log('Sign up successful!');
+
+    // Get the Firebase user object
+    const user = userCredential.user;
+
+    // Now send the user's data (uid, email, displayName) to the backend
+    if (user) {
+      this.authService.registerUser(user.uid, this.regForm.value.email, this.regForm.value.name)
+        .subscribe(
+          (response) => {
+            console.log('User registered successfully in Firestore:', response);
+            // Redirect or perform any additional actions
+            this.route.navigate(['home']);
+          },
+          (error) => {
+            console.error('Error registering user in Firestore:', error);
+            alert('Error registering user in Firestore.');
+          }
+        );
+    }
+  })
+  .catch((error) => {
+    console.error('Error during sign up:', error);
+    alert('Error during sign up. Please try again.');
+  });
     // this.route.navigate(['next',this.regForm.value.email]);
   }
 
