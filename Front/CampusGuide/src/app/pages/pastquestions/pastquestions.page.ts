@@ -63,9 +63,9 @@ export class PastquestionsPage implements OnInit{
       pdfUrl: this.pdfUrl,
     };
 
-    this.questionService.addQuestion(question).then(() => {
-      this.clearForm();
-    });
+  //  this.questionService.addQuestion(question).then(() => {
+  //     this.clearForm();
+  //   });
   }
 
   clearForm() {

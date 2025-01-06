@@ -1,0 +1,40 @@
+<ion-content [fullscreen]="true">
+  <app-header></app-header>
+  <h2>Choose the subject</h2>
+  <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-input label="Question Name" formControlName="name" type="text" label-placement="floating" fill="outline"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="questionForm.get('name')?.hasError('required') && questionForm.get('name')?.touched">
+      Name is required.
+    </ion-note>
+
+    <ion-item>
+      <ion-input label="Subject Name" formControlName="subjectName" type="text" label-placement="floating" fill="outline"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="questionForm.get('subjectName')?.hasError('required') && questionForm.get('subjectName')?.touched">
+      Subject name is required.
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="stacked">Upload File</ion-label>
+      <input type="file" (change)="onFileSelected($event)" accept=".doc,.docx,.pdf"/>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="File Url" formControlName="fileUrl" type="text" label-placement="floating" fill="outline"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="CreatedBy" formControlName="createdBy" type="text" label-placement="floating" fill="outline"></ion-input>
+    </ion-item>
+    <br>
+
+
+    <ion-button expand="block" type="submit" [disabled]="!selectedFile">Submit Question</ion-button>
+  </form>
+
+  <ion-note *ngIf="questionForm.invalid && questionForm.touched">
+    Please fill out all required fields and select a file before submitting.
+  </ion-note>
+  </ion-content>

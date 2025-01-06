@@ -1,25 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionsService {
 
-  private apiUrl = "https://campusbackend-36og.onrender.com"; // Backend URL
+  private apiUrl = "http://localhost:5000"; // Backend URL
 
   constructor(private http: HttpClient) {}
 
   // Add a question
-  addQuestion(question: any) {
-    return this.http.post(`${this.apiUrl}/questions`, question).toPromise()
-      .then((response: any) => {
-        console.log('Question added successfully!');
-        return response;
-      })
-      .catch((error) => {
-        console.log(error.error || error.message);
-      });
+  addQuestion(question: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/questions`, question);
+  }
+
+  uploadDoc(formData: FormData): Observable<any> {
+    return this.http.post('http://localhost:5000/upload/pdf', formData);
   }
 
   // Get all questions

@@ -54,5 +54,9 @@ export const routes: Routes = [
   },{
     path: 'next/:email',
     loadComponent: () => import('./register-next/register-next.page').then( m => m.RegisterNextPage)
+  },  {
+    path: 'question-form',
+    loadComponent: () => import('./pages/question-form/question-form.page').then( m => m.QuestionFormPage)
   }
+
 ];
