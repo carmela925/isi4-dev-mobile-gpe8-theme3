@@ -3,18 +3,14 @@
   <h2>Choose the subject</h2>
   <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
     <ion-item>
-      <ion-input label="Question Name" formControlName="name" type="text" label-placement="floating" fill="outline"></ion-input>
+      <ion-input label="Question Name" formControlName="title" type="text" label-placement="floating" fill="outline" required></ion-input>
     </ion-item>
-    <ion-note *ngIf="questionForm.get('name')?.hasError('required') && questionForm.get('name')?.touched">
-      Name is required.
-    </ion-note>
+
 
     <ion-item>
-      <ion-input label="Subject Name" formControlName="subjectName" type="text" label-placement="floating" fill="outline"></ion-input>
+      <ion-input label="Subject Name" formControlName="subjectName" type="text" label-placement="floating" fill="outline" required></ion-input>
     </ion-item>
-    <ion-note *ngIf="questionForm.get('subjectName')?.hasError('required') && questionForm.get('subjectName')?.touched">
-      Subject name is required.
-    </ion-note>
+
 
     <ion-item>
       <ion-label position="stacked">Upload File</ion-label>

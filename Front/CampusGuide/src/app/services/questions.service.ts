@@ -17,7 +17,7 @@ export class QuestionsService {
   }
 
   uploadDoc(formData: FormData): Observable<any> {
-    return this.http.post('http://localhost:5000/upload/pdf', formData);
+    return this.http.post('https://campusbackend-36og.onrender.com/upload/pdf', formData);
   }
 
   // Get all questions

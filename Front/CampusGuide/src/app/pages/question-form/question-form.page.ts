@@ -7,13 +7,14 @@ import { QuestionsService } from 'src/app/services/questions.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Auth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-question-form',
   templateUrl: './question-form.page.html',
   styleUrls: ['./question-form.page.scss'],
   standalone: true,
-  imports: [IonNote, IonButton, IonLabel, IonItem, IonSkeletonText, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule, HeaderModule]
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, HeaderModule]
 })
 export class QuestionFormPage implements OnInit {
 
@@ -27,7 +28,7 @@ export class QuestionFormPage implements OnInit {
     private route: ActivatedRoute,private authService : AuthService
   ) {
     this.questionForm = this.fb.group({
-      name: ['', Validators.required],
+      title: ['', Validators.required],
       subjectName: ['', Validators.required],
       fileUrl: [''],
       createdBy: [''],
@@ -44,6 +45,7 @@ export class QuestionFormPage implements OnInit {
       this.authService.getUserData(user.uid).then(userData => {
         this.user = userData;
         this.questionForm.value.createdBy = this.user.displayName;
+        console.log(this.questionForm.value.createdBy);
       }).catch(err => {
         console.error('Error fetching user data:', err);
       });
@@ -75,6 +77,7 @@ export class QuestionFormPage implements OnInit {
     next: (response) => {
       // If the file upload is successful, store the file URL in the form data
       this.questionForm.value.fileUrl = response.fileUrl;
+      console.log(response.fileUrl);
 
       // Now add the question with the file URL and other form data
       this.questionService.addQuestion(this.questionForm.value).subscribe({

@@ -19,7 +19,7 @@ export class RegisterNextPage implements OnInit {
   level!: number;
   field: string = '';
   specialty: string = '';
-  role: string = 'student'; 
+  role: string = 'student';
 
   constructor(
     private authService : AuthService,
@@ -46,7 +46,7 @@ export class RegisterNextPage implements OnInit {
         (data)=>{
           console.log(data);
           console.log("heyy");
-          this.redirect.navigate(['home']);
+          this.redirect.navigate(['/home']);
         },
         (error) => console.error(error)  // Handle errors as needed. For example, display a popup message.  // Example: this.toastController.create({ message: 'Registration failed', duration: 2000 }).then(toast => toast.present());  // Display a toast message.  // Example: this.router.navigate(['/tabs/home']);  // Navigate to home page.  // Example: this.router.navigate(['/tabs
       )
