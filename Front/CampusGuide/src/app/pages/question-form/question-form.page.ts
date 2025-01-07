@@ -40,18 +40,7 @@ export class QuestionFormPage implements OnInit {
   }
 
   async loadUserName() {
-    const user = this.auth.currentUser;
-    if (user) {
-      this.authService.getUserData(user.uid).then(userData => {
-        this.user = userData;
-        this.questionForm.value.createdBy = this.user.displayName;
-        console.log(this.questionForm.value.createdBy);
-      }).catch(err => {
-        console.error('Error fetching user data:', err);
-      });
-    } else {
-      console.error('No user is currently logged in.');
-    }
+
   }
 
   onFileSelected(event: Event): void {
@@ -62,6 +51,8 @@ export class QuestionFormPage implements OnInit {
     }
   }
 
+
+
   onSubmit(): void{
 
     if (!this.selectedFile) {
@@ -69,6 +60,20 @@ export class QuestionFormPage implements OnInit {
       return;
     }
 
+    const user = this.auth.currentUser;
+    if (user) {
+      this.authService.getUserData(user.uid).then(userData => {
+        this.user = userData;
+        this.questionForm.value.createdBy = this.user.name;
+        console.log(this.questionForm.value.createdBy);
+      }).catch(err => {
+        console.error('Error fetching user data:', err);
+      });
+    } else {
+      console.error('No user is currently logged in.');
+    }
+
+    // const name =
     const formData = new FormData();
   formData.append('file', this.selectedFile);
 
@@ -82,7 +87,7 @@ export class QuestionFormPage implements OnInit {
       // Now add the question with the file URL and other form data
       this.questionService.addQuestion(this.questionForm.value).subscribe({
         next: () => {
-          console.log('Question added successfully');
+          alert('Question added successfully');
           // Optionally, reset the form or show a success message
           this.questionForm.reset();
           this.selectedFile = null; // Reset the file selection
