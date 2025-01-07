@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PreferencesService } from 'src/app/services/preferences.service';
 
 @Component({
   selector: 'app-tabs',
@@ -6,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tabs.component.scss'],
 })
 export class TabsComponent  implements OnInit {
+  isTeacher: boolean = false;
+  constructor(private preferenceService: PreferencesService) { }
 
-  constructor() { }
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.preferenceService.get("user").then((user) => {
+      this.isTeacher = user.role === "teacher";
+    })
+  }
 
 }

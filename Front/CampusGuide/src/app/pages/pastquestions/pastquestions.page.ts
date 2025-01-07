@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonItem, IonBackdrop, IonSpinner, IonSkeletonText } from '@ionic/angular/standalone';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { HeaderModule } from "../../components/header/header/header.module";
 import { MenuModule } from "../../components/menu/menu.module";
 import { QuestionsService } from 'src/app/services/questions.service';
@@ -29,22 +29,21 @@ export class PastquestionsPage implements OnInit{
 
   constructor(
     private questionService: QuestionsService,
+    private router: Router,
     private subjectService: SubjectService,
     private preferenceService: PreferencesService
-  ) {
-    this.preferenceService.get('user').then(user => {
-      this.user = user;
-      console.log("from constrictor ",this.user);  // Now it should log the user object
-    }).catch(error => {
-      console.error('Error retrieving user:', error);
-    })
-  }
+  ) {}
 
   ngOnInit(): void {
     this.preferenceService.get('user').then(user => {
       if(user){
-        this.user = user;
-        this.getAllUserSubjects();
+        if(user.role === "teacher"){
+          this.hasLoaded = true;
+          this.router.navigate(['pastquestions/subject/teacher']);
+        } else {
+          this.user = user;
+          this.getAllUserSubjects();
+        }
       } else {
         console.log("No user saved");
         this.hasLoaded = true;

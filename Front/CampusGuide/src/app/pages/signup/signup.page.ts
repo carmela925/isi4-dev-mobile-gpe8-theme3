@@ -1,26 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonButton, IonImg, IonInput, LoadingController } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonButton, IonImg, IonInput, LoadingController, IonBackdrop, IonItem, IonSpinner } from '@ionic/angular/standalone';
 import { environment } from 'src/environments/environment.prod';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, RouterModule } from '@angular/router';
+import { PreferencesService } from 'src/app/services/preferences.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
   standalone: true,
-  imports: [IonInput, IonImg, IonButton, IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule, RouterModule]
+  imports: [IonSpinner, IonItem, IonBackdrop, IonInput, IonImg, IonButton, IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule, RouterModule]
 })
 export class SignupPage implements OnInit {
   logo = environment.logo;
   regForm !: FormGroup;
   role: string = 'student'; // Default role is 'student'
+  isLoading = false;
 
   constructor(private formBuilder:FormBuilder,
     private authService : AuthService,
-    private route: Router
+    private router: Router,
+    private preferencesService: PreferencesService
   ) { }
 
   ngOnInit() {
@@ -48,11 +51,13 @@ export class SignupPage implements OnInit {
   }
 
   register() {
+    this.isLoading = true;
     // Trim and validate email
     this.regForm.value.email = this.regForm.value.email.trim();
     if (!this.isValidEmail(this.regForm.value.email)) {
       console.error('Invalid email address.');
       alert('Please enter a valid email address.');
+      this.isLoading = false;
       return;
     }
 
@@ -60,13 +65,14 @@ export class SignupPage implements OnInit {
     if (!this.regForm.value.password || this.regForm.value.password.length < 6) {
       console.error('Password must be at least 6 characters long.');
       alert('Password must be at least 6 characters.');
+      this.isLoading = false;
       return;
     }
 
     // Call AuthService to handle Firebase signup
-  this.authService.signUp(this.regForm.value.email, this.regForm.value.password, this.regForm.value.name)
-  .then((userCredential) => {
-    console.log('Sign up successful!');
+    this.authService.signUp(this.regForm.value.email, this.regForm.value.password, this.regForm.value.name)
+    .then((userCredential) => {
+      console.log('Sign up successful!');
 
     // Get the Firebase user object
     const user = userCredential.user;
@@ -77,16 +83,11 @@ export class SignupPage implements OnInit {
         .subscribe(
           (response) => {
             console.log('User registered successfully in Firestore:', response);
-            // Redirect or perform any additional actions
-            if (response.role==='teacher') {
-              this.route.navigate(['home']);
-            } 
-            if(response.role==='student'){
-              this.route.navigate(['next',response.uid]);
-            }
+            this.saveUser(response);
           },
           (error) => {
             console.error('Error registering user in Firestore:', error);
+            this.isLoading = false;
             alert('Error registering user in Firestore.');
           }
         );
@@ -94,9 +95,9 @@ export class SignupPage implements OnInit {
   })
   .catch((error) => {
     console.error('Error during sign up:', error);
+    this.isLoading = false;
     alert('Error during sign up. Please try again.');
   });
-    // this.route.navigate(['next',this.regForm.value.email]);
   }
 
   // Email validation function
@@ -105,4 +106,21 @@ export class SignupPage implements OnInit {
     return emailRegex.test(email);
   }
 
+  async saveUser(user: any){
+    if ((!user.level || !user.field) && user.role!=="teacher") {
+      this.isLoading = false;
+      this.router.navigate(['/next',user.uid]);
+    } else {
+      try {
+        await this.preferencesService.set("user",user);
+        console.log("saved user",user)
+        this.isLoading = false;
+        this.router.navigate(['/home']);
+      } catch (error) {
+        console.log(error);
+        this.isLoading = false;
+        this.router.navigate(['/home']);
+      }
+    }
+  }
 }

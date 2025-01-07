@@ -19,6 +19,12 @@
       </ion-button>
     </form>
   </div>
+  @if (isLoading) {
+    <ion-backdrop style="background-color: #000; opacity: 0.4;" [visible]="true"></ion-backdrop>
+    <ion-item class="spinner">
+      <ion-spinner name="crescent"></ion-spinner>
+    </ion-item>
+  }
 </ion-content>
 
 
