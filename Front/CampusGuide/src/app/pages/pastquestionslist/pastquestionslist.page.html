@@ -8,6 +8,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content pullingText="Pull to refresh"></ion-refresher-content>
+  </ion-refresher>
   <div class="search">
     <ion-searchbar></ion-searchbar>
   </div>
@@ -26,35 +29,40 @@
   </ion-buttons>
   <div class="tags"></div>
   <ion-list lines="none">
-    <ion-item button>
-        <div class="image">
-            <img src="/assets/icon/document.svg" alt="">
+    @if (isLoading) {
+      <ion-item button>
+        <div class="image" style="opacity: 0.5;">
         </div>
         <ion-label>
-          <h6>CC1-Advanced Algorithm</h6>
-          <p>Dr Someone, Mme Another</p>
+          <h6>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </h6>
+          <p>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </p>
         </ion-label>
-        <i class="fa-regular fa-bookmark"></i>
-    </ion-item>
-    <ion-item button>
-        <div class="image">
-            <img src="/assets/icon/document.svg" alt="">
-        </div>
-        <ion-label>
-          <h6>CC1-Advanced Algorithm</h6>
-          <p>Dr Someone, Mme Another</p>
-        </ion-label>
-        <i class="fa-regular fa-bookmark"></i>
-    </ion-item>
-    <ion-item button>
-        <div class="image">
-            <img src="/assets/icon/document.svg" alt="">
-        </div>
-        <ion-label>
-          <h6>CC1-Advanced Algorithm</h6>
-          <p>Dr Someone, Mme Another</p>
-        </ion-label>
-        <i class="fa-regular fa-bookmark"></i>
-    </ion-item>
+      </ion-item>
+    }
+    @if (!isLoading) {
+      @for (question of questions; track $index) {
+        <ion-item button>
+          <div class="image">
+              <img src="/assets/icon/document.svg" alt="">
+          </div>
+          <ion-label>
+            <h6>{{question.title}}</h6>
+            <p>{{question.createdBy}}</p>
+          </ion-label>
+          <div class="flex-item">
+            <ion-button fill="clear" style="font-size: 15px;">
+              <ion-icon slot="icon-only" name="download-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" style="font-size: 15px;">
+              <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-item>
+      }
+    }
 </ion-list>
 </ion-content>

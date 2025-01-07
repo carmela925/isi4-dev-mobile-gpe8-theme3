@@ -28,7 +28,6 @@ export class PastquestionsPage implements OnInit{
   pdfUrl: string = ''; // PDF URL for the question (if applicable)
 
   constructor(
-    private questionService: QuestionsService,
     private router: Router,
     private subjectService: SubjectService,
     private preferenceService: PreferencesService
@@ -75,9 +74,9 @@ export class PastquestionsPage implements OnInit{
   }
 
   getAllUserSubjects(){
-    this.subjectService.getAllSubjects().subscribe(
-      (data) => {
-        this.subjects = data.filter((subject: Subject) => subject.level===this.user.level);
+    this.subjectService.getSubjectsByLevelAndFieldAndSpecialty(this.user.level,this.user.field,this.user.specialty).subscribe(
+      (data:any) => {
+        this.subjects = data.subjects;
         this.getIcons()
         console.log(this.subjects)
       },
@@ -86,6 +85,17 @@ export class PastquestionsPage implements OnInit{
         console.log("Couldn't fetch subjects")
       }
     )
+    // this.subjectService.getAllSubjects().subscribe(
+    //   (data) => {
+    //     this.subjects = data.filter((subject: Subject) => subject.level===this.user.level);
+    //     this.getIcons()
+    //     console.log(this.subjects)
+    //   },
+    //   (error) => {
+    //     this.hasLoaded = true;
+    //     console.log("Couldn't fetch subjects")
+    //   }
+    // )
   }
 
   getIcons(){

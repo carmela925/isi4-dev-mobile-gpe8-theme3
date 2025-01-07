@@ -7,6 +7,9 @@ import { PreferencesService } from '../services/preferences.service';
 import { AuthService } from '../services/auth.service';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { bookmark, bookmarkOutline, downloadOutline } from 'ionicons/icons';
+import { QuestionsService } from '../services/questions.service';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +22,7 @@ export class HomePage implements OnInit {
   show: boolean = false;
   user: any;
   isLoading: boolean = true;  // Add a loading flag
+  recentQuestions: any[] = [];
 
   public actionSheetButtons = [
     {
@@ -43,8 +47,19 @@ export class HomePage implements OnInit {
     },
   ];
 
-  constructor(private preferenceService: PreferencesService, private authService : AuthService
-    , private auth: Auth,private router: Router) {}
+  constructor(
+    private preferenceService: PreferencesService, 
+    private authService : AuthService, 
+    private auth: Auth,
+    private router: Router,
+    private questionService: QuestionsService
+  ) {
+      addIcons({
+        bookmarkOutline,
+        bookmark,
+        downloadOutline
+      })
+    }
 
   ngOnInit() {
     // Fetch the user data when the component is initialized
@@ -64,7 +79,7 @@ export class HomePage implements OnInit {
         console.log(userData);
         this.user = userData;
         console.log(userData)
-        this.isLoading = false;  // Once data is loaded, set loading to false
+        this.getRecents();
       }).catch(err => {
         console.error('Error fetching user data:', err);
         this.isLoading = false;
@@ -86,5 +101,23 @@ export class HomePage implements OnInit {
 
   receivedState(state: boolean) {
     this.show = state;
+  }
+
+  getRecents(){
+    let createdBy;
+    if (this.user.role === "teacher") {
+      createdBy = this.user.name
+    }
+    this.questionService.getRecentQuestions(5,createdBy).subscribe(
+      (data:any) => {
+        this.recentQuestions = data.questions;
+        this.isLoading = false;  // Once data is loaded, set loading to false
+        console.log(this.recentQuestions)
+      },
+      (error) => {
+        this.isLoading = false;  // Once data is loaded, set loading to false
+        console.error('Error fetching recent questions:', error);
+      }
+    )
   }
 }

@@ -46,4 +46,11 @@ export class QuestionsService {
         console.log(error.error || error.message);
       });
   }
+
+  getRecentQuestions(limit: number, createdBy?: string){
+    if (createdBy) {
+      return this.http.get(`${this.apiUrl}/questions/recent/limit?limit=`+limit+`&createdBy=`+createdBy);
+    }
+    return this.http.get(`${this.apiUrl}/questions/recent/limit?limit=`+limit);
+  }
 }

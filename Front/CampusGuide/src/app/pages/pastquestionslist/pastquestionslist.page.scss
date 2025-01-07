@@ -33,3 +33,14 @@ ion-list{
       height: 33px;
     }
   }
+
+  ion-toolbar{
+    --background: none;
+    --box-shadow: none;
+    background-color: #f00;
+    color: #fff;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
