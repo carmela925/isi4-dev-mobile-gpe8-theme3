@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class QuestionsService {
 
-  private apiUrl = "http://localhost:5000"; // Backend URL
+  private apiUrl = "https://campusbackend-36og.onrender.com"; // Backend URL
 
   constructor(private http: HttpClient) {}
 
