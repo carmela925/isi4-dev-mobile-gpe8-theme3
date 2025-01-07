@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { IonContent, IonActionSheet, IonButton, IonInput, IonTab, IonTabBar, IonTabButton, IonIcon, IonTabs, IonButtons, IonSearchbar, IonList, IonItem, IonLabel, IonSkeletonText } from '@ionic/angular/standalone';
+import { IonContent, IonActionSheet, IonButton, IonInput, IonTab, IonTabBar, IonTabButton, IonIcon, IonTabs, IonButtons, IonSearchbar, IonList, IonItem, IonLabel, IonSkeletonText, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { DragDropModule } from 'primeng/dragdrop';
 import { CommonModule } from '@angular/common';
 import { MenuModule } from "../components/menu/menu.module";
 import { PreferencesService } from '../services/preferences.service';
 import { AuthService } from '../services/auth.service';
 import { Auth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonSkeletonText, IonLabel, IonItem, IonList, IonSearchbar, IonContent, DragDropModule, CommonModule, MenuModule],
+  imports: [ IonButton,IonIcon,IonSkeletonText, IonLabel, IonItem, IonList, IonSearchbar, IonContent, DragDropModule, CommonModule, MenuModule],
 })
 export class HomePage implements OnInit {
   show: boolean = false;
@@ -42,7 +43,8 @@ export class HomePage implements OnInit {
     },
   ];
 
-  constructor(private preferenceService: PreferencesService, private authService : AuthService, private auth: Auth) {}
+  constructor(private preferenceService: PreferencesService, private authService : AuthService
+    , private auth: Auth,private router: Router) {}
 
   ngOnInit() {
     // Fetch the user data when the component is initialized
@@ -71,6 +73,10 @@ export class HomePage implements OnInit {
       console.error('No user is currently logged in.');
       this.isLoading = false;
     }
+  }
+
+  navigateToQuestionForm() {
+    this.router.navigate(['/question-form']);
   }
 
   showMenu() {
