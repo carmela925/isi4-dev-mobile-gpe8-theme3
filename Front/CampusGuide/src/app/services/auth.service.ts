@@ -84,6 +84,15 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register`, body);
   }
 
+  updateUserStudent(uid: string, level: number, field: string, specialty: string){
+    const body = {
+      level,
+      field,
+      specialty
+    }
+    return this.http.put(`${this.apiUrl}/users/${uid}`, body);
+  }
+
   async getUserData(uid: string) {
     try {
       const userDoc = await getDoc(doc(this.firestore, 'users', uid));

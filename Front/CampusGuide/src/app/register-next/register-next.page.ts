@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonImg, IonButton, IonButtons, IonBackButton, IonInput } from '@ionic/angular/standalone';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-next',
@@ -14,16 +15,24 @@ import { AuthService } from '../services/auth.service';
 })
 export class RegisterNextPage implements OnInit {
   logo = environment.logo;
+  userid: string | null = null;
   level!: number;
   field: string = '';
   specialty: string = '';
   role: string = 'student'; 
 
-  constructor(private authService : AuthService) {
+  constructor(
+    private authService : AuthService,
+    private route: ActivatedRoute,
+    private redirect: Router
+  ) {
   }
 
   ngOnInit() {
-    console.log('hey')
+    this.route.paramMap.subscribe((params) => {
+      this.userid = params.get('id');
+      console.log(this.userid);
+    });
   }
 
   register() {
@@ -32,8 +41,15 @@ export class RegisterNextPage implements OnInit {
       console.log("provide all inputs");
       return;
     }
-    console.log("Successfully")
-
-    // Call AuthService to handle update
-}
+    if (this.userid) {
+      this.authService.updateUserStudent(this.userid, this.level, this.field, this.specialty).subscribe(
+        (data)=>{
+          console.log(data);
+          console.log("heyy");
+          this.redirect.navigate(['home']);
+        },
+        (error) => console.error(error)  // Handle errors as needed. For example, display a popup message.  // Example: this.toastController.create({ message: 'Registration failed', duration: 2000 }).then(toast => toast.present());  // Display a toast message.  // Example: this.router.navigate(['/tabs/home']);  // Navigate to home page.  // Example: this.router.navigate(['/tabs
+      )
+    }
+  }
 }

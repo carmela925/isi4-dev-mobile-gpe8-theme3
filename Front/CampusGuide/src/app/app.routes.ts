@@ -52,9 +52,10 @@ export const routes: Routes = [
     path: 'map',
     loadComponent: () => import('./pages/map/map.page').then( m => m.MapPage)
   },{
-    path: 'next/:email',
+    path: 'next/:id',
     loadComponent: () => import('./register-next/register-next.page').then( m => m.RegisterNextPage)
-  },  {
+  },
+  {
     path: 'question-form',
     loadComponent: () => import('./pages/question-form/question-form.page').then( m => m.QuestionFormPage)
   }

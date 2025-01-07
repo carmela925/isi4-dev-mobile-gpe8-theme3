@@ -110,9 +110,7 @@ export class SigninPage implements OnInit {
        if (userData) {
          // Log the user data from Firestore to the console
          console.log('User data from Firestore:', userData);
-
-         // Navigate to the home page after successful sign-in
-         this.router.navigate(['/home']);
+         this.saveUser(userData);
        } else {
          console.error('No user data found for UID:', userCredential.user.uid);
          alert('No user data found. Please try again later.');
@@ -133,25 +131,20 @@ export class SigninPage implements OnInit {
     return emailRegex.test(email);
   }
 
-  async saveUser(){
-    const user = {
-      uid: this.authService.getAuth()?.uid,
-      name: this.authService.getAuth()?.displayName,
-      email: this.authService.getAuth()?.email,
-      field: "Engineering",
-      specialty: "ISI",
-      level: 4,
-      loginDate: new Date()
-    }
-    try {
-      await this.preferencesService.set("user",user);
-      console.log("saved user",user)
-      this.isLoading = false;
-      this.router.navigate(['/home']);
-    } catch (error) {
-      console.log(error);
-      this.isLoading = false;
-      this.router.navigate(['/home']);
+  async saveUser(user: any){
+    if (!user.level || !user.field) {
+      this.router.navigate(['/next',user.uid]);
+    } else {
+      try {
+        await this.preferencesService.set("user",user);
+        console.log("saved user",user)
+        this.isLoading = false;
+        this.router.navigate(['/home']);
+      } catch (error) {
+        console.log(error);
+        this.isLoading = false;
+        this.router.navigate(['/home']);
+      }
     }
   }
 

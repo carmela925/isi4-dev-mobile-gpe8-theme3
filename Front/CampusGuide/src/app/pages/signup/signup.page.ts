@@ -19,7 +19,6 @@ export class SignupPage implements OnInit {
   role: string = 'student'; // Default role is 'student'
 
   constructor(private formBuilder:FormBuilder,
-    private loadingController: LoadingController,
     private authService : AuthService,
     private route: Router
   ) { }
@@ -79,10 +78,12 @@ export class SignupPage implements OnInit {
           (response) => {
             console.log('User registered successfully in Firestore:', response);
             // Redirect or perform any additional actions
-            // if (user.role) {
-              
-            // }
-            this.route.navigate(['home']);
+            if (response.role==='teacher') {
+              this.route.navigate(['home']);
+            } 
+            if(response.role==='student'){
+              this.route.navigate(['next',response.uid]);
+            }
           },
           (error) => {
             console.error('Error registering user in Firestore:', error);
