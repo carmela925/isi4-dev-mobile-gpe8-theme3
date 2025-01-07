@@ -30,7 +30,7 @@ export class QuestionFormPage implements OnInit {
       name: ['', Validators.required],
       subjectName: ['', Validators.required],
       fileUrl: [''],
-      createdBy: ['y39ScEfpV6eGG9ZMlihqx0evIT42'],
+      createdBy: [''],
     });
   }
 
