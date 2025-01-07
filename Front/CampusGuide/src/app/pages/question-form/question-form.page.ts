@@ -43,7 +43,7 @@ export class QuestionFormPage implements OnInit {
     if (user) {
       this.authService.getUserData(user.uid).then(userData => {
         this.user = userData;
-        this.questionForm.value.createdBy = userData['displayName'];
+        this.questionForm.value.createdBy = 'y39ScEfpV6eGG9ZMlihqx0evIT42';
       }).catch(err => {
         console.error('Error fetching user data:', err);
       });

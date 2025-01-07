@@ -30,6 +30,12 @@ export class QuestionsService {
     return this.http.get(`${this.apiUrl}/questions/${subjectId}`).toPromise();
   }
 
+  downloadFile(filename: string): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/files/download/${filename}`, {
+      responseType: 'blob'
+    });
+  }
+
   // Delete a question
   deleteQuestion(questionId: string) {
     return this.http.delete(`${this.apiUrl}/questions/${questionId}`).toPromise()
