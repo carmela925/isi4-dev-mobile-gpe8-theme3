@@ -79,6 +79,9 @@ export class SignupPage implements OnInit {
           (response) => {
             console.log('User registered successfully in Firestore:', response);
             // Redirect or perform any additional actions
+            // if (user.role) {
+              
+            // }
             this.route.navigate(['home']);
           },
           (error) => {

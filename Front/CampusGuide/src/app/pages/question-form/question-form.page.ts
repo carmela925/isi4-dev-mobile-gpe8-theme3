@@ -30,7 +30,7 @@ export class QuestionFormPage implements OnInit {
       name: ['', Validators.required],
       subjectName: ['', Validators.required],
       fileUrl: [''],
-      createdBy: ['y39ScEfpV6eGG9ZMlihqx0evIT42'],
+      createdBy: [''],
     });
   }
 
@@ -43,7 +43,7 @@ export class QuestionFormPage implements OnInit {
     if (user) {
       this.authService.getUserData(user.uid).then(userData => {
         this.user = userData;
-        this.questionForm.value.createdBy = 'y39ScEfpV6eGG9ZMlihqx0evIT42';
+        this.questionForm.value.createdBy = this.user.displayName;
       }).catch(err => {
         console.error('Error fetching user data:', err);
       });
