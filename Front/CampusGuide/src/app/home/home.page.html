@@ -5,14 +5,26 @@
                 <div class="bar"></div>
                 <div class="bar"></div>
             </div>
-            <div class="flex-item">
-                <div class="image">
-                    <img src="/assets/icon/bell.svg" alt="">
+            @if (isLoading) {
+                <div class="flex-item">
+                    <div class="image">
+                        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                    </div>
+                    <div class="image">
+                        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                    </div>
                 </div>
-                <div class="image">
-                    <img [src]="'/assets/icon/'+user.role+'.svg'" alt="">
+            }
+            @if (!isLoading) {
+                <div class="flex-item">
+                    <div class="image">
+                        <img src="/assets/icon/bell.svg" alt="">
+                    </div>
+                    <div class="image">
+                        <img [src]="'/assets/icon/'+user.role+'.svg'" alt="">
+                    </div>
                 </div>
-            </div>
+            }
         </div>
         @if(!isLoading){
         <h1 class="poppins-medium">Hello {{user.name}}!</h1>

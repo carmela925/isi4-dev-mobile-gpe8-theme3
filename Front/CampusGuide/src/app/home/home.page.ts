@@ -59,8 +59,9 @@ export class HomePage implements OnInit {
     console.log(user);
     if (user) {
       this.authService.getUserData(user.uid).then(userData => {
+        console.log(userData);
         this.user = userData;
-        console.log(user)
+        console.log(userData)
         this.isLoading = false;  // Once data is loaded, set loading to false
       }).catch(err => {
         console.error('Error fetching user data:', err);
