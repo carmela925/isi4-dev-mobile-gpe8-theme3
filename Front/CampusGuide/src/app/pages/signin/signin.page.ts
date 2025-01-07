@@ -132,7 +132,7 @@ export class SigninPage implements OnInit {
   }
 
   async saveUser(user: any){
-    if (!user.level || !user.field) {
+    if ((!user.level || !user.field) && user.role!=="teacher") {
       this.router.navigate(['/next',user.uid]);
     } else {
       try {
