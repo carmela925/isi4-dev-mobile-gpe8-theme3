@@ -1,3 +1,7 @@
+ion-content{
+  position: relative;
+  *{z-index: 1;}
+}
 .image{
     width: 30px;
     height: 30px;
@@ -44,3 +48,36 @@ ion-list{
     align-items: center;
     justify-content: space-between;
   }
+
+  .search{
+    width: 100%;
+    background-color: transparent;
+    margin-top: 15px;
+    --border-radius: 50px;
+    --box-shadow: 0 0 10px rgba(0, 0, 0,0.1);
+  }
+  .shadow{
+    height: 22%;
+    width: 100%;
+    background-color: transparent;
+  }
+
+  .search-container{
+    position: fixed;
+    z-index: 2;
+    background-color: #fff;
+    border-bottom: 2px solid #e2e2e2;
+    height: 22%;
+    width: 100%;
+  }
+
+ .filters{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+ } 
+
+ .active{
+  --background: #000;
+  --color: #fff;
+ }
