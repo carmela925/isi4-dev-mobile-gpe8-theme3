@@ -90,6 +90,12 @@ export class HomePage implements OnInit {
     }
   }
 
+  onItemClick(fileUrl: string): void {
+    if (fileUrl) {
+      window.open(fileUrl, '_blank');
+    }
+  }
+
   navigateToQuestionForm() {
     this.router.navigate(['/question-form']);
   }
