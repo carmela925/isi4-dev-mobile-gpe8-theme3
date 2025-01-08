@@ -84,6 +84,9 @@ export class QuestionFormPage implements OnInit {
       this.questionForm.value.fileUrl = response.fileUrl;
       console.log(response.fileUrl);
 
+      const link = "https://campusbackend-36og.onrender.com/uploads/"+response.publicId;
+      console.log(link);
+
       // Now add the question with the file URL and other form data
       this.questionService.addQuestion(this.questionForm.value).subscribe({
         next: () => {

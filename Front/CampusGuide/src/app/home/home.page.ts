@@ -48,8 +48,8 @@ export class HomePage implements OnInit {
   ];
 
   constructor(
-    private preferenceService: PreferencesService, 
-    private authService : AuthService, 
+    private preferenceService: PreferencesService,
+    private authService : AuthService,
     private auth: Auth,
     private router: Router,
     private questionService: QuestionsService
