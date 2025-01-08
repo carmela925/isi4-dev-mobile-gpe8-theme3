@@ -108,7 +108,7 @@ export class HomePage implements OnInit {
     if (this.user.role === "teacher") {
       createdBy = this.user.name
     }
-    this.questionService.getRecentQuestions(5,createdBy).subscribe(
+    this.questionService.getRecentQuestions(3,createdBy).subscribe(
       (data:any) => {
         this.recentQuestions = data.questions;
         this.isLoading = false;  // Once data is loaded, set loading to false

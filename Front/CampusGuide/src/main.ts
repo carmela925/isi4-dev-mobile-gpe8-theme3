@@ -17,7 +17,7 @@ bootstrapApplication(AppComponent, {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     importProvidersFrom(IonicStorageModule.forRoot({
       name: 'campus-guide-db',
-      driverOrder: [Drivers.IndexedDB]
+      driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage]
     })),
     provideIonicAngular(),
     provideHttpClient(),
