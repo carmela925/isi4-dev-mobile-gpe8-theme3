@@ -11,23 +11,24 @@
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content pullingText="Pull to refresh"></ion-refresher-content>
   </ion-refresher>
-  <div class="search">
-    <ion-searchbar></ion-searchbar>
-  </div>
-  <ion-buttons class="filters">
-    <ion-button>
-      <i class="fa-solid fa-sliders"></i>
-    </ion-button>
-    <ion-buttons>
-      <ion-button>
-        <i class="fa-solid fa-arrow-down-a-z"></i>
-      </ion-button>
-      <ion-button>
-        <i class="fa-solid fa-arrow-up-a-z"></i>
-      </ion-button>
+  <div class="search-container">
+    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="onSearch()" class="search"></ion-searchbar>
+    <ion-buttons class="filters ion-padding">
+      <div>
+        <ion-button [class.active]="recentToggle" (click)="sortByRecent()"  style="text-transform: none;" fill="outline" shape="round">Recent</ion-button>
+        <ion-button [class.active]="oldestToggle" (click)="sortByOldest()"  style="text-transform: none;" fill="outline" shape="round">Oldest</ion-button>
+      </div>
+      <ion-buttons>
+        <ion-button [class.active]="descToggle" (click)="sortByNameDesc()"  fill="outline" shape="round">
+          <i class="fa-solid fa-arrow-down-a-z"></i>
+        </ion-button>
+        <ion-button [class.active]="ascToggle" (click)="sortByNameAsc()" fill="outline" shape="round">
+          <i class="fa-solid fa-arrow-up-a-z"></i>
+        </ion-button>
+      </ion-buttons>
     </ion-buttons>
-  </ion-buttons>
-  <div class="tags"></div>
+  </div>
+  <div class="shadow"></div>
   <ion-list lines="none">
     @if (isLoading) {
       <ion-item button>
@@ -44,8 +45,8 @@
       </ion-item>
     }
     @if (!isLoading) {
-      @for (question of questions; track $index) {
-        <ion-item button>
+      @for (question of filteredQuestions; track $index) {
+        <ion-item [ngStyle]="{ 'margin-bottom': $index === filteredQuestions.length - 1 ? '100px' : '10px' }" button>
           <div class="image">
               <img src="/assets/icon/document.svg" alt="">
           </div>
