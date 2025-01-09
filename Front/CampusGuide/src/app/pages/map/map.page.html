@@ -8,40 +8,40 @@
           .cls-1 {
             fill: #f5f5f5;
           }
-    
+
           .cls-2 {
             fill: #dcdcdc;
           }
-    
+
           .cls-3 {
             fill: rgba(255,255,255,0);
           }
-    
+
           .cls-4 {
             fill: #707070;
           }
-    
+
           .cls-5 {
             fill: #ebebeb;
           }
-    
+
           .cls-6 {
             fill: #ffdfdf;
           }
-    
+
           .cls-7 {
             fill: #fff;
           }
-    
+
           .cls-8 {
             font-size: 57px;
           }
-    
+
           .cls-8, .cls-9 {
             font-family: SegoeUI-Semibold, Segoe UI;
             font-weight: 600;
           }
-    
+
           .cls-9 {
             font-size: 85px;
           }
@@ -135,7 +135,7 @@
           <path id="Tracé_5-2" data-name="Tracé 5" class="cls-4" d="M3203.927-68.231a1.493,1.493,0,0,1-.645-.147,1.5,1.5,0,0,1-.708-2L3265.41-202a1.5,1.5,0,0,1,2-.707,1.5,1.5,0,0,1,.708,2L3205.281-69.085A1.5,1.5,0,0,1,3203.927-68.231Z" transform="translate(3307.983 -3405.927) rotate(90)"/>
         </g>
       </g>
-    </svg>    
+    </svg>
     <canvas width="300px" height="600px" #myCanvas style="border: 1px solid black;"></canvas>
   </div>
   <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
@@ -145,4 +145,10 @@
   </ion-popover>
   <div class="route"></div>
   <div id="position"></div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="" (click)="scanBarCode()">
+    <ion-fab-button>
+      <ion-icon name="qr-code-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

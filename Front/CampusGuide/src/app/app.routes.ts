@@ -58,6 +58,10 @@ export const routes: Routes = [
   {
     path: 'question-form',
     loadComponent: () => import('./pages/question-form/question-form.page').then( m => m.QuestionFormPage)
+  },  {
+    path: 'qr-code',
+    loadComponent: () => import('./pages/qr-code/qr-code.page').then( m => m.QrCodePage)
   }
+
 
 ];
