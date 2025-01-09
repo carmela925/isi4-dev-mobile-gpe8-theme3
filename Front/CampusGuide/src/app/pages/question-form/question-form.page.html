@@ -11,7 +11,12 @@
 
 
     <ion-item>
-      <ion-input label="Subject Name" formControlName="subjectName" type="text" label-placement="floating" fill="outline" required></ion-input>
+      <ion-label>Subject</ion-label>
+      <ion-select formControlName="subjectName" placeholder="Select the subject">
+        <ion-select-option *ngFor="let subject of subjects" [value]="subject.name">
+          {{ subject.name }}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-note *ngIf="questionForm.get('subjectName')?.hasError('required') && questionForm.get('subjectName')?.touched" class="note">
       Subject Name is required.

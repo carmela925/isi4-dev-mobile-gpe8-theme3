@@ -15,6 +15,11 @@ export class SubjectService {
     return this.http.get<any[]>(url);
   }
 
+  getAllSubjects2(): Observable<any>{
+    const url = this.apiUrl; //replace with actual api to fetch all subjects
+    return this.http.get<any>(url);
+  }
+
   getSubjectsByLevelAndFieldAndSpecialty(level?: number, field?: string, specialty?: string): Observable<any[]> {
     if (level) {
       if (field) {

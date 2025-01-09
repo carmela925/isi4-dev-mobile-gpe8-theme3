@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Auth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { IonicModule } from '@ionic/angular';
+import { SubjectService } from 'src/app/services/subject.service';
+import { Subject } from 'src/app/models/subject';
 
 @Component({
   selector: 'app-question-form',
@@ -21,9 +23,10 @@ export class QuestionFormPage implements OnInit {
   selectedFile: File | null = null;
   questionForm!: FormGroup;
   user: any;
+  subjects: Subject[] = []; // Store fetched subjects here
 
 
-  constructor(private questionService : QuestionsService,
+  constructor(private questionService : QuestionsService, private subjectService:SubjectService,
     private fb: FormBuilder,private router: Router,private auth: Auth,
     private route: ActivatedRoute,private authService : AuthService
   ) {
@@ -37,6 +40,23 @@ export class QuestionFormPage implements OnInit {
 
   ngOnInit() {
     this.loadUserName();
+    this.loadSubjects();
+  }
+
+  loadSubjects() {
+    this.subjectService.getAllSubjects2().subscribe({
+      next: (data) => {
+        // Ensure the 'subjects' property exists and is an array
+        if (data && Array.isArray(data.subjects)) {
+          this.subjects = data.subjects;
+        } else {
+          console.error('Subjects data is not in the expected format:', data);
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching subjects', err);
+      }
+    });
   }
 
   async loadUserName() {
@@ -81,12 +101,13 @@ export class QuestionFormPage implements OnInit {
   this.questionService.uploadDoc(formData).subscribe({
     next: (response) => {
       // If the file upload is successful, store the file URL in the form data
-      this.questionForm.value.fileUrl = response.fileUrl;
+
       console.log(response.fileUrl);
 
       const link = "https://campusbackend-36og.onrender.com/uploads/"+response.publicId;
       console.log(link);
 
+      this.questionForm.value.fileUrl = link;
       // Now add the question with the file URL and other form data
       this.questionService.addQuestion(this.questionForm.value).subscribe({
         next: () => {

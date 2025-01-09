@@ -151,7 +151,7 @@
                         <ion-skeleton-text [animated]="true"></ion-skeleton-text>
                       </p>
                     </ion-label>
-                </ion-item> 
+                </ion-item>
                 <ion-item button>
                     <div class="image">
                         <ion-skeleton-text [animated]="true"></ion-skeleton-text>
@@ -164,11 +164,11 @@
                         <ion-skeleton-text [animated]="true"></ion-skeleton-text>
                       </p>
                     </ion-label>
-                </ion-item>  
+                </ion-item>
             }
             @if (!isLoading) {
                 @for (recent of recentQuestions; track $index) {
-                    <ion-item [ngStyle]="{ 'margin-bottom': $index === recentQuestions.length - 1 ? '100px' : '10px' }" button>
+                    <ion-item [ngStyle]="{ 'margin-bottom': $index === recentQuestions.length - 1 ? '100px' : '10px' }" (click)="onItemClick(recent.fileUrl)" button>
                         <div class="image">
                             <img src="/assets/icon/document.svg" alt="">
                         </div>
