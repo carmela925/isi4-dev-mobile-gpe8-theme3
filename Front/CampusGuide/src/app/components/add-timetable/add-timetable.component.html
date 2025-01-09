@@ -18,7 +18,7 @@
           <ion-datetime
             id="time"
             presentation="time"
-            value="01:22"
+            (ionChange)="onstartTimeChange($event)"
             [formatOptions]="{
               time: {
                 hour: '2-digit',
@@ -38,7 +38,7 @@
           <ion-datetime
             id="time2"
             presentation="time"
-            value="01:22"
+            (ionChange)="onEndTimeChange($event)"
             [formatOptions]="{
               time: {
                 hour: '2-digit',

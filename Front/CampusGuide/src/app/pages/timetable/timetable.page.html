@@ -64,5 +64,5 @@
     <!-- Date Picker -->
      <div class="back" (click)="closeDatePicker()" *ngIf="isDatePickerOpen"></div>
     <ion-datetime (ionChange)="onDateChange($event)" class="mybackdrop datetime"  *ngIf="isDatePickerOpen"></ion-datetime>
-    <app-add-timetable (state)="receivedState($event)" [isModalOpen]="isModalOpen"></app-add-timetable>
+    <app-add-timetable (entry)="recievedEntry($event)" (state)="receivedState($event)" [isModalOpen]="isModalOpen"></app-add-timetable>
 </ion-content>

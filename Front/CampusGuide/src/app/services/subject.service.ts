@@ -11,7 +11,7 @@ export class SubjectService {
 
   //getAllSubjects
   getAllSubjects(): Observable<any[]>{
-    const url = this.apiUrl; //replace with actual api to fetch all subjects
+    const url = this.apiUrl;
     return this.http.get<any[]>(url);
   }
 
@@ -48,5 +48,28 @@ export class SubjectService {
         return data.subjects.filter((subject: any) => subject.level === level);
       })
     );
+  }
+
+  getIcons(): Observable<any[]>{
+    const apiUrl = "assets/subjects.json";
+    return  this.http.get<any[]>(apiUrl);
+  }
+
+  getIconByName(subjectName: string): Observable<string | null> {
+    return new Observable((observer) => {
+      this.getIcons().subscribe(
+        (data: any) => {
+        for (const specialty of data.subjects) {
+          for (const semester of specialty.semesters) {
+            const subject = semester.find((s:any) => s.name === subjectName);
+            if (subject) {
+              observer.next(subject.icon); // Return icon if found
+              return;
+            }
+          }
+        }
+        observer.next(null); // Return null if not found
+      });
+    });
   }
 }

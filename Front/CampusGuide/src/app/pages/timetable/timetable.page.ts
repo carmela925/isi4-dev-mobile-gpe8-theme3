@@ -8,6 +8,8 @@ import { addIcons } from 'ionicons';
 import { calendarOutline, saveOutline } from 'ionicons/icons';
 import { AddTimetableModule } from "../../components/add-timetable/add-timetable.module";
 import { Subject } from 'src/app/models/subject';
+import { PreferencesService } from 'src/app/services/preferences.service';
+import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
   selector: 'app-timetable',
@@ -52,7 +54,7 @@ export class TimetablePage implements OnInit,AfterViewInit {
     'Nov',
     'Dec'
   ]
-  subjects: Subject[] = [];
+  entries: any[] = [];
   movies = [
     'Episode I - The Phantom Menace',
     'Episode II - Attack of the Clones',
@@ -65,7 +67,10 @@ export class TimetablePage implements OnInit,AfterViewInit {
   ];
 
 
-  constructor(){
+  constructor(
+    private preferenceService: PreferencesService,
+    private subjectService: SubjectService
+  ){
     addIcons({
       calendarOutline,
       saveOutline
@@ -175,6 +180,59 @@ export class TimetablePage implements OnInit,AfterViewInit {
 
   recievedEntry(entry: any) {
     this.isModalOpen = false;
-    console.log(entry)
+    console.log("entry",entry)
+    if(this.entries.length===0){this.entries.push(entry);}
+    if(!this.entries.find(course => (course.startTime === entry.startTime || course.endTime === entry.endTime))){
+      this.entries.push(entry);
+    }
+
+    this.entries.sort((a, b) => {
+      const timeToMilliseconds = (time: string) => {
+        const [hours, minutes] = time.split(":").map(Number);
+        return hours * 60 * 60 * 1000 + minutes * 60 * 1000; // Convert to milliseconds
+      };
+    
+      return timeToMilliseconds(a.startTime) - timeToMilliseconds(b.startTime);
+    });
+
+    console.log(this.entries);
+  }
+
+  getTimetable(date: Date){
+
+  }
+
+  getSubjectIcon(subjectName: string){
+    this.subjectService.getIconByName(subjectName).subscribe((icon) => {
+      console.log('Icon:', icon);
+      return icon;
+    });
+    return null;
+  }
+
+  calculateDuration(startTime: string, endTime: string): string {
+    // Convert time (hh:mm) to total minutes
+    function timeToMinutes(time: string): number {
+      const [hours, minutes] = time.split(':').map(Number);
+      return hours * 60 + minutes;
+    }
+  
+    // Convert start and end time to total minutes
+    const startMinutes = timeToMinutes(startTime);
+    const endMinutes = timeToMinutes(endTime);
+  
+    // Calculate the difference in minutes
+    let durationMinutes = endMinutes - startMinutes;
+  
+    // If the end time is earlier than the start time, add 24 hours (1440 minutes)
+    if (durationMinutes < 0) {
+      durationMinutes += 24 * 60;
+    }
+  
+    // Convert the duration back to hours and minutes
+    const hours = Math.floor(durationMinutes / 60);
+    const minutes = durationMinutes % 60;
+  
+    return `${hours} hours ${minutes} minutes`;
   }
 }

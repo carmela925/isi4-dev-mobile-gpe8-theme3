@@ -2,6 +2,8 @@
   "subjects": [
     {
       "level": 4,
+      "field": "Engineering",
+      "specialty": "ISI",
       "semesters": [
         [ 
           { "name": "Algorithms", "icon": "fa-code-branch" },
@@ -28,6 +30,8 @@
     },
     {
       "level": 5,
+      "field": "Engineering",
+      "specialty": "ISI",
       "semesters": [
         [
           { "name": "Advanced Database", "icon": "fa-database" },
