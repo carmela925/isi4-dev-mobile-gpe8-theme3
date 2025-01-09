@@ -37,25 +37,25 @@
     <main>
       <div class="flex-item">
         <div class="markers">
-          @for (movie of movies; track $index) {
+          @for (entry of entries; track $index) {
             <div class="marker" #cardmarker [class.active]="$index===0">
-              <p>9:30</p>
-              <p>12:30</p>
+              <p>{{entry.startTime}}</p>
+              <p>{{entry.endTime}}</p>
             </div>
           }
         </div>
         <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-          @for (movie of movies; track $index) {
+          @for (entry of entries; track $index) {
             <div class="schedule" #card [class.active]="$index===0" cdkDrag>
-              <h3>IT Architecture</h3>
-              <p>code UE2ISD</p>
-              <p>7h 30mins</p>
-              <p>Dr Someone</p>
-              <p>online</p>
-              <i class="subject-icon fas fa-network-wired"></i>
+              <h3>{{entry.course.name}}</h3>
+              <p>code {{entry.course.codeUE}}</p>
+              <p>{{calculateDuration(entry.startTime,entry.endTime)}}</p>
+              <p>{{entry.course.field}}</p>
+              <p>{{entry.course.specialty}}</p>
+              <i class="subject-icon fas" [class]="subjectsIcons.get(entry.course.name) ? subjectsIcons.get(entry.course.name) : ''"></i>
             </div>
           }
-          <!-- <div class="example-box" #card *ngFor="let movie of movies" cdkDrag>{{movie}}</div> -->
+          <!-- <div class="example-box" #card *ngFor="let entry of entries" cdkDrag>{{entry}}</div> -->
         </div>
       </div>
     </main>

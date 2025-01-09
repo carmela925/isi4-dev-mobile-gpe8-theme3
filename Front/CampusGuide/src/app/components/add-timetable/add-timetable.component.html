@@ -5,7 +5,7 @@
       <ion-label>Select Course</ion-label>
       <div class="custom-select">
         <select formControlName="course" name="course" id="course">
-          <option *ngFor="let subject of subjects" [value]="subject">{{ subject.name }}</option>
+          <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</option>
         </select>
       </div>
     </ion-item>

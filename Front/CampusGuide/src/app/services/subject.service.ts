@@ -6,8 +6,18 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SubjectService {
+  icons: any;
   private apiUrl =  "https://campusbackend-36og.onrender.com/subject";
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.getIcons().subscribe(
+      (data) => {
+        this.icons = data;
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  }
 
   //getAllSubjects
   getAllSubjects(): Observable<any[]>{
@@ -21,28 +31,33 @@ export class SubjectService {
   }
 
   getSubjectsByLevelAndFieldAndSpecialty(level?: number, field?: string, specialty?: string): Observable<any[]> {
-    if (level) {
+    if(level) {
       if (field) {
         if(specialty){
           const url = `${this.apiUrl}/filter?level=${level}&field=${field}&specialty=${specialty}`;
           return this.http.get<any[]>(url);
-        }
+        } 
         return this.http.get<any[]>(`${this.apiUrl}/filter?level=${level}&field=${field}`);
       }
+
       if (specialty) {
         return this.http.get<any[]>(`${this.apiUrl}/filter?level=${level}&specialty=${specialty}`);
       }
+
       return this.http.get<any[]>(`${this.apiUrl}/filter?level=${level}`);
     }
+
     if (field) {
       if (specialty) {
         return this.http.get<any[]>(`${this.apiUrl}/filter?field=${field}&specialty=${specialty}`);
       }
       return this.http.get<any[]>(`${this.apiUrl}/filter?field=${field}`);
     }
+
     if (specialty) {
       return this.http.get<any[]>(`${this.apiUrl}/filter?specialty=${specialty}`);
     }
+    
     return this.http.get<any[]>(`${this.apiUrl}/filter`);
   }
 
@@ -55,26 +70,9 @@ export class SubjectService {
     );
   }
 
-  getIcons(): Observable<any[]>{
-    const apiUrl = "assets/subjects.json";
-    return  this.http.get<any[]>(apiUrl);
+  getIcons(): Observable<any>{
+    const url = "assets/subjects.json";
+    return  this.http.get<any>(url);
   }
 
-  getIconByName(subjectName: string): Observable<string | null> {
-    return new Observable((observer) => {
-      this.getIcons().subscribe(
-        (data: any) => {
-        for (const specialty of data.subjects) {
-          for (const semester of specialty.semesters) {
-            const subject = semester.find((s:any) => s.name === subjectName);
-            if (subject) {
-              observer.next(subject.icon); // Return icon if found
-              return;
-            }
-          }
-        }
-        observer.next(null); // Return null if not found
-      });
-    });
-  }
 }

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SubjectLike } from 'rxjs';
 import { Subject } from 'src/app/models/subject';
 import { PreferencesService } from 'src/app/services/preferences.service';
 import { SubjectService } from 'src/app/services/subject.service';
@@ -60,11 +59,15 @@ export class AddTimetableComponent  implements OnInit {
 
   createEntry(){
     if(this.courseForm.get('endTime')?.value<=this.courseForm.get('startTime')?.value){
-      console.log("End date can't be less than start")
+      console.log("End date can't be less than start");
     } else {
-      const newCourse = this.courseForm.value;
+      const newCourse = {
+        course: this.subjects.find((subject)=>subject.id===this.courseForm.get('course')?.value),
+        startTime: this.courseForm.get('startTime')?.value,
+        endTime: this.courseForm.get('endTime')?.value
+      };
       console.log('New Course:', newCourse);
-      this.entry.emit(this.courseForm.value);
+      this.entry.emit(newCourse);
       this.isModalOpen = false;
     }
   }

@@ -1,13 +1,12 @@
-import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {CdkDragDrop, DragDropModule, moveItemInArray} from '@angular/cdk/drag-drop';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonTabButton, IonButton, IonIcon, IonLabel, IonItem, IonDatetime, IonModal, IonDatetimeButton, IonBackdrop } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonIcon, IonDatetime, IonBackdrop } from '@ionic/angular/standalone';
 import { HeaderModule } from "../../components/header/header/header.module";
 import { addIcons } from 'ionicons';
 import { calendarOutline, saveOutline } from 'ionicons/icons';
 import { AddTimetableModule } from "../../components/add-timetable/add-timetable.module";
-import { Subject } from 'src/app/models/subject';
 import { PreferencesService } from 'src/app/services/preferences.service';
 import { SubjectService } from 'src/app/services/subject.service';
 
@@ -40,6 +39,9 @@ export class TimetablePage implements OnInit,AfterViewInit {
   selectedYear = new Date().getFullYear();
   initialDate: string = new Date().toISOString();
 
+  newTimetables = new Map<string, any[]>();
+  subjectsIcons = new Map<string, string>();
+
   months = [
     'Jan',
     'Feb',
@@ -54,6 +56,7 @@ export class TimetablePage implements OnInit,AfterViewInit {
     'Nov',
     'Dec'
   ]
+
   entries: any[] = [];
   movies = [
     'Episode I - The Phantom Menace',
@@ -69,18 +72,21 @@ export class TimetablePage implements OnInit,AfterViewInit {
 
   constructor(
     private preferenceService: PreferencesService,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private cdr: ChangeDetectorRef
   ){
     addIcons({
       calendarOutline,
-      saveOutline
+      saveOutline,
     });
     this.selectedDate = new Date().getDate();
   }
   
   ngOnInit() {
+    const newDate = new Date(this.selectedYear, this.selectedMonth, this.selectedDate || 1);
+    this.entries = this.newTimetables.get(newDate.toLocaleDateString()) || [];
     this.updateDates();
-    
+    this.getSubjectIcons();
   }
 
   ngAfterViewInit() {
@@ -148,6 +154,8 @@ export class TimetablePage implements OnInit,AfterViewInit {
     this.selectedMonth = selectedModalDate.getMonth();      // Extract the month (0-indexed)
     console.log("selectedDate: ",selectedModalDate);
     this.selectedDate = selectedModalDate.getDate();
+    const newDate = new Date(this.selectedYear, this.selectedMonth, this.selectedDate || 1);
+    this.entries = this.newTimetables.get(newDate.toLocaleDateString()) || [];
     this.updateDates();    
     this.closeDatePicker()                            // Update the dates array
     this.scrollToSelectedDate();
@@ -156,6 +164,8 @@ export class TimetablePage implements OnInit,AfterViewInit {
   onDateSelect(date: number) {
     this.selectedDate = date; // Highlight selected date
     console.log(`Selected date: ${this.selectedYear}-${this.selectedMonth + 1}-${date}`);
+    const newDate = new Date(this.selectedYear, this.selectedMonth, this.selectedDate || 1);
+    this.entries = this.newTimetables.get(newDate.toLocaleDateString()) || [];
     this.scrollToSelectedDate();
   }
 
@@ -180,7 +190,9 @@ export class TimetablePage implements OnInit,AfterViewInit {
 
   recievedEntry(entry: any) {
     this.isModalOpen = false;
-    console.log("entry",entry)
+    console.log("entry",entry);
+    const newDate = new Date(this.selectedYear, this.selectedMonth, this.selectedDate || 1);
+
     if(this.entries.length===0){this.entries.push(entry);}
     if(!this.entries.find(course => (course.startTime === entry.startTime || course.endTime === entry.endTime))){
       this.entries.push(entry);
@@ -195,6 +207,13 @@ export class TimetablePage implements OnInit,AfterViewInit {
       return timeToMilliseconds(a.startTime) - timeToMilliseconds(b.startTime);
     });
 
+    this.cdr.detectChanges();
+    this.dimensionMarkers();
+
+    console.log(newDate)
+    this.newTimetables.set(newDate.toLocaleDateString(),this.entries);
+
+    console.log(this.cards);
     console.log(this.entries);
   }
 
@@ -202,12 +221,22 @@ export class TimetablePage implements OnInit,AfterViewInit {
 
   }
 
-  getSubjectIcon(subjectName: string){
-    this.subjectService.getIconByName(subjectName).subscribe((icon) => {
-      console.log('Icon:', icon);
-      return icon;
-    });
-    return null;
+  getSubjectIcons(){
+    this.subjectService.getIcons().subscribe(
+      (data) => {
+        data.subjects.forEach((sub:any)=>{
+          sub.semesters.forEach((semester: any) => {
+            semester.forEach((element:any) => {
+              this.subjectsIcons.set(element.name, element.icon)
+            });
+          });
+        });
+        console.log(this.subjectsIcons); 
+      },
+      (error) => {
+        console.log("Couldn't fetch subjects icons")
+      }
+    )
   }
 
   calculateDuration(startTime: string, endTime: string): string {
