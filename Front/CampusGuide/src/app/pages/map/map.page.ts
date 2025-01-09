@@ -1,8 +1,11 @@
-import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnInit, QueryList, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonPopover, IonSearchbar } from '@ionic/angular/standalone';
+import { IonContent, IonPopover, IonSearchbar, IonFab, IonFabButton, IonIcon } from '@ionic/angular/standalone';
 import { HeaderModule } from "../../components/header/header/header.module";
+import { CartService } from 'src/app/services/cart.service';
+import { addIcons } from 'ionicons';
+import { qrCodeOutline } from 'ionicons/icons';
 
 // This component will display a custom map with interactive functionality like zooming, panning, and dragging.
 @Component({
@@ -10,7 +13,7 @@ import { HeaderModule } from "../../components/header/header/header.module";
   templateUrl: './map.page.html',
   styleUrls: ['./map.page.scss'],
   standalone: true,
-  imports: [IonSearchbar, IonPopover, IonContent, CommonModule, FormsModule, HeaderModule]
+  imports: [IonIcon, IonFabButton, IonFab, IonSearchbar, IonPopover, IonContent, CommonModule, FormsModule, HeaderModule]
 })
 export class MapPage implements OnInit, AfterViewInit{
   rooms: QueryList<ElementRef> | null = null;
@@ -19,8 +22,13 @@ export class MapPage implements OnInit, AfterViewInit{
   private ctx!: CanvasRenderingContext2D;
   isOpen:boolean = false;
   text: string = 'map';
+  private cartService = inject(CartService);
+    isToast = false;
+    toastData: any = {};
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef) {
+    addIcons({ qrCodeOutline });
+  }
 
   ngOnInit() {
     console.log("hey")
@@ -64,7 +72,7 @@ export class MapPage implements OnInit, AfterViewInit{
           if(hasClassTop){
             position.style.left = (x - 3 + rect.width/2) + "px";
             position.style.top = (y - 22) + "px";
-          } 
+          }
           if (hasClassBottom) {
             position.style.left = (x - 3 + rect.width/2) + "px";
             position.style.top = (y + rect.height + 10) + "px";
@@ -114,5 +122,41 @@ export class MapPage implements OnInit, AfterViewInit{
     this.ctx.strokeStyle = 'blue'; // Set line color
     this.ctx.lineWidth = 2; // Set line width
     this.ctx.stroke(); // Stroke the path
+  }
+
+
+  //Axel Worked here
+  async scanBarCode(){
+
+    try{
+      const code = await this.cartService.startscan();
+      console.log(code)
+    }
+    catch(e){
+      console.log(e)
+    }
+  }
+
+  async scanAndPay() {
+    try {
+      const code = await this.cartService.startscan(0);
+      console.log(code);
+      if (!code) {
+        this.isToast = true;
+        this.toastData = {
+          color: 'danger',
+          message: 'Error! Please try again',
+        };
+        return;
+      }
+
+      this.isToast = true;
+      this.toastData = {
+        color: 'success',
+        message: 'Payment successful',
+      };
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
