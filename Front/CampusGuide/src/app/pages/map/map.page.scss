@@ -44,7 +44,9 @@ ion-select::part(icon) {
 .specialchooser{
     position: absolute;
     top: 20px;
-    left: 20px
+    left: 20px;
+    width: 100%;
+    display: flex;
 }
 
 #position{

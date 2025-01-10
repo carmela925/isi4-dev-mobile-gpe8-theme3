@@ -2,7 +2,6 @@
   <app-header></app-header>
   <!-- <ion-searchbar class="search search-map"></ion-searchbar> -->
   <ion-item class="specialchooser">
-    <ion-label>Choose a Floor</ion-label>
     <ion-select 
       [(ngModel)]="currentFloor" 
       interface="popover" 
@@ -10,17 +9,13 @@
       <ion-select-option value="1">Floor 1</ion-select-option>
       <ion-select-option value="2">Floor 2</ion-select-option>
     </ion-select>
-  </ion-item>
-
-  <ion-item class="specialchooser2">
-    <ion-label>Choose a Building</ion-label>
     <ion-select 
-      [(ngModel)]="currentBuilding" 
-      interface="popover" 
-      placeholder="Select Floor">
-      <ion-select-option value="1">Building 1</ion-select-option>
-    </ion-select>
-  </ion-item>
+    [(ngModel)]="currentBuilding" 
+    interface="popover" 
+    placeholder="Select Floor">
+    <ion-select-option value="1">Building 1</ion-select-option>
+  </ion-select>
+ </ion-item>
   
   <div class="map-container">
     @if(currentFloor===1){
