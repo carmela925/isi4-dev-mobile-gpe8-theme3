@@ -110,6 +110,10 @@
             <p>{{course.specialty}}</p>
     </div>
    }
+   @if(!course){
+    <h2 class="ion-padding"></h2>
+    <div class="schedule no"></div>
+   }
     <div class="questions">
         <div class="flex-item">
             <h2 class="ion-padding">Recent Q&A</h2>
