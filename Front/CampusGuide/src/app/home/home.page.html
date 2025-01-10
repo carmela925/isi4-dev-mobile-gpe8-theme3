@@ -101,15 +101,15 @@
         }
     </div>
 
+    @if(course){
     <h2 class="ion-padding">Your Schedule</h2>
     <div class="schedule">
-        <h3>IT Architecture</h3>
-        <p>code UE2ISD</p>
-        <p>7h 30mins</p>
-        <p>Dr Someone</p>
-        <p>online</p>
-        <i class="subject-icon fas fa-network-wired"></i>
+            <h3>{{course.name}}</h3>
+            <p>code {{course.codeUE}}</p>
+            <p>{{course.field}}</p>
+            <p>{{course.specialty}}</p>
     </div>
+   }
     <div class="questions">
         <div class="flex-item">
             <h2 class="ion-padding">Recent Q&A</h2>

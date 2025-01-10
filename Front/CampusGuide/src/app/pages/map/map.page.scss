@@ -13,6 +13,21 @@
 //     object-fit: cover; 
 //     transform: rotate(90deg);
 // }
+
+ion-select {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --background: #f9f9f9;
+  --border-radius: 8px;
+  --icon-color: #666;
+  --color: #333;
+}
+
+ion-select::part(icon) {
+  font-size: 1.2em;
+  color: var(--ion-color-primary);
+}
+
   
 #custom-map {
     width: 200%;
@@ -24,6 +39,12 @@
     position: absolute;
     top: 10%;
     left: -50%;
+}
+
+.specialchooser{
+    position: absolute;
+    top: 20px;
+    left: 20px
 }
 
 #position{

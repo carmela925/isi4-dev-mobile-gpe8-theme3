@@ -58,17 +58,6 @@ export class TimetablePage implements OnInit,AfterViewInit {
   ]
 
   entries: any[] = [];
-  movies = [
-    'Episode I - The Phantom Menace',
-    'Episode II - Attack of the Clones',
-    'Episode III - Revenge of the Sith',
-    'Episode IV - A New Hope',
-    'Episode V - The Empire Strikes Back',
-    'Episode VI - Return of the Jedi',
-    'Episode VII - The Force Awakens',
-    'Episode VIII - The Last Jedi'
-  ];
-
 
   constructor(
     private preferenceService: PreferencesService,
@@ -85,6 +74,10 @@ export class TimetablePage implements OnInit,AfterViewInit {
   ngOnInit() {
     const newDate = new Date(this.selectedYear, this.selectedMonth, this.selectedDate || 1);
     this.entries = this.newTimetables.get(newDate.toLocaleDateString()) || [];
+    this.preferenceService.get("timetables").then((data)=>{
+      this.newTimetables = data || new Map<string, any[]>(); 
+      
+    });
     this.updateDates();
     this.getSubjectIcons();
   }
@@ -171,7 +164,7 @@ export class TimetablePage implements OnInit,AfterViewInit {
 
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.entries, event.previousIndex, event.currentIndex);
   }
 
   dimensionMarkers(){
@@ -212,6 +205,7 @@ export class TimetablePage implements OnInit,AfterViewInit {
 
     console.log(newDate)
     this.newTimetables.set(newDate.toLocaleDateString(),this.entries);
+    this.preferenceService.set("timetables",this.newTimetables);
 
     console.log(this.cards);
     console.log(this.entries);
