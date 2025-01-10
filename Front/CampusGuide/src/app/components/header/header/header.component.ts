@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent  implements OnInit {
   show: boolean = false;
-  constructor() { }
+  user: any;
+  isLoading: boolean = true; 
+  constructor(
+        private authService : AuthService,
+        private auth: Auth
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("hey");
+    const user = this.auth.currentUser;
+    console.log(user);
+    if (user) {
+      this.authService.getUserData(user.uid).then(userData => {
+        this.user = userData;
+      }).catch(err => {
+        console.error('Error fetching user data:', err);
+        this.isLoading = false;
+      });
+    } else {
+      console.error('No user is currently logged in.');
+      this.isLoading = false;
+    }
+  }
 
   showMenu(){
     this.show = true;

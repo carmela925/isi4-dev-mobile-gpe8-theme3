@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, inject, OnInit, QueryList, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonPopover, IonSearchbar, IonFab, IonFabButton, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonPopover,IonSelect, IonSelectOption, IonSearchbar, IonFab, IonFabButton, IonIcon, IonItem, IonLabel } from '@ionic/angular/standalone';
 import { HeaderModule } from "../../components/header/header/header.module";
 import { CartService } from 'src/app/services/cart.service';
 import { addIcons } from 'ionicons';
@@ -13,7 +13,7 @@ import { qrCodeOutline } from 'ionicons/icons';
   templateUrl: './map.page.html',
   styleUrls: ['./map.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonFabButton, IonFab, IonSearchbar, IonPopover, IonContent, CommonModule, FormsModule, HeaderModule]
+  imports: [IonLabel, IonItem,IonSelect, IonSelectOption, IonIcon, IonFabButton, IonFab, IonSearchbar, IonPopover, IonContent, CommonModule, FormsModule, HeaderModule]
 })
 export class MapPage implements OnInit, AfterViewInit{
   rooms: QueryList<ElementRef> | null = null;
@@ -21,7 +21,9 @@ export class MapPage implements OnInit, AfterViewInit{
   @ViewChild('myCanvas', { static: false }) canvas!: ElementRef<HTMLCanvasElement>;
   private ctx!: CanvasRenderingContext2D;
   isOpen:boolean = false;
-  text: string = 'map';
+  currentFloor = 1;
+  currentBuilding = 1;
+  text: any;
   private cartService = inject(CartService);
     isToast = false;
     toastData: any = {};
@@ -67,7 +69,7 @@ export class MapPage implements OnInit, AfterViewInit{
           const y = rect.top + window.scrollY;
           this.popover.event = e;
           this.isOpen = true;
-          this.text = room.nativeElement.id;
+          this.text.title = room.nativeElement.id;
           position.style.left = (x - 22) + "px";
           if(hasClassTop){
             position.style.left = (x - 3 + rect.width/2) + "px";

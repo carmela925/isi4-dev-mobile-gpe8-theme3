@@ -23,6 +23,7 @@ export class HomePage implements OnInit {
   user: any;
   isLoading: boolean = true;  // Add a loading flag
   recentQuestions: any[] = [];
+  course: any;
 
   public actionSheetButtons = [
     {
@@ -88,6 +89,13 @@ export class HomePage implements OnInit {
       console.error('No user is currently logged in.');
       this.isLoading = false;
     }
+
+    this.preferenceService.get("timetables").then((data:Map<string, any[]>)=>{
+      this.course = data.get((new Date()).toLocaleDateString()) || null;
+      if(this.course.length!==null){
+        this.course = this.course[0].course;
+      }
+    })
   }
 
   onItemClick(fileUrl: string): void {

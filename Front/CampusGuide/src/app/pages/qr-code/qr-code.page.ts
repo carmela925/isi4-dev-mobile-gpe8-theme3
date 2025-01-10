@@ -1,8 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { QRCodeModule } from 'angular2-qrcode';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonToast, IonButton, IonItem, IonNote, IonLabel, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonCardTitle, IonCardHeader, IonCard, IonToast, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { CartService } from 'src/app/services/cart.service';
 import { HeaderModule } from "../../components/header/header/header.module";
 
@@ -12,7 +11,7 @@ import { HeaderModule } from "../../components/header/header/header.module";
   templateUrl: './qr-code.page.html',
   styleUrls: ['./qr-code.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonLabel, IonNote, IonItem, IonButton, IonToast, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, HeaderModule]
+  imports: [IonIcon, IonButton, IonContent, CommonModule, FormsModule, HeaderModule]
 })
 export class QrCodePage implements OnInit {
 
@@ -23,7 +22,7 @@ export class QrCodePage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
+    console.log("heyy");
   }
 
   async scanBarCode(){
