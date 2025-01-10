@@ -21,6 +21,7 @@ export class MapPage implements OnInit, AfterViewInit{
   @ViewChild('myCanvas', { static: false }) canvas!: ElementRef<HTMLCanvasElement>;
   private ctx!: CanvasRenderingContext2D;
   isOpen:boolean = false;
+  currentFloor = 1;
   text: string = 'map';
   private cartService = inject(CartService);
     isToast = false;
